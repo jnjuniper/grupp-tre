@@ -8,7 +8,7 @@ This will be done from scratch, inspiration taken from some of our own favorite 
 We will be using Javascript, other technologies such as database, styling (TailwindCSS) or standard CSS is yet to be decided by the group.
 
 
-MERGING PR RULES:
+❗MERGING PR RULES: ❗
 
 1. Publish branch when work is done. Add Jonathan or another member as a code reviewer ⌛
 
@@ -16,11 +16,11 @@ MERGING PR RULES:
 
 3. Programmer do the necessary adjustments, creates a new commit, pushes it again. Then tell the reviewer to take another look at the refined code.
 
-4. Reviewer examines the code, if everything looks good. Approve it.
+4. Reviewer examines the code, if everything looks good. Approve it. ☑️
 
 5. Merge PR (Pull request) to the main/master. Delete the old branch.
 
-6. Last step, do a git pull in main/master branch in VSCode to make sure everything works.
+6. Last step, do a git pull in main/master branch in VSCode to make sure everything works. 🏁
 
 
-All created branches should be named related to the task. Such as ''Feature/XXX'' ''Fix//XXX''
+❗ All created branches should be named related to the task. Such as ''Feature/XXX'' ''Fix//XXX'' ❗
