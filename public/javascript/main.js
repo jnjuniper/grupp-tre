@@ -57,6 +57,15 @@ const updateHeaderStyles = () => {
   }
 };
 
+// Funktion för att återställa hamburgarens ikon
+const resetHamburgerIcon = () => {
+  hamburgerIconTop.style.transform = "rotate(0)";
+  hamburgerIconMiddle.style.opacity = "1";
+  hamburgerIconBottom.style.transform = "rotate(0)";
+  hamburgerIconTop.style.backgroundColor = "currentColor";
+  hamburgerIconBottom.style.backgroundColor = "currentColor";
+};
+
 // Funktion för att toggla hamburgarmenyn
 hamburger.addEventListener("click", () => {
   isSidebarOpen = !isSidebarOpen;
@@ -66,16 +75,16 @@ hamburger.addEventListener("click", () => {
 
   updateHeaderStyles();
 
-  // Uppdatera hamburger-ikonen
-  hamburgerIconTop.style.transform = isSidebarOpen
-    ? "rotate(45deg) translateY(8px)"
-    : "rotate(0)";
-  hamburgerIconMiddle.style.opacity = isSidebarOpen ? "0" : "1";
-  hamburgerIconBottom.style.transform = isSidebarOpen
-    ? "rotate(-45deg) translateY(-8px)"
-    : "rotate(0)";
-  hamburgerIconTop.style.backgroundColor = isSidebarOpen ? "black" : "currentColor";
-  hamburgerIconBottom.style.backgroundColor = isSidebarOpen ? "black" : "currentColor";
+  if (isSidebarOpen) {
+    // Uppdatera hamburger-ikonen till ett kryss
+    hamburgerIconTop.style.transform = "rotate(45deg) translateY(8px)";
+    hamburgerIconMiddle.style.opacity = "0";
+    hamburgerIconBottom.style.transform = "rotate(-45deg) translateY(-8px)";
+    hamburgerIconTop.style.backgroundColor = "black";
+    hamburgerIconBottom.style.backgroundColor = "black";
+  } else {
+    resetHamburgerIcon(); // Återställ ikonen
+  }
 });
 
 // Funktion för att toggla varukorgens sidomeny
@@ -99,7 +108,6 @@ cartImgDesktop.addEventListener("click", (e) => {
   toggleCartSidebar();
 });
 
-
 // Stäng hamburgarmenyn vid klick utanför
 window.addEventListener("click", (e) => {
   if (
@@ -110,6 +118,7 @@ window.addEventListener("click", (e) => {
     isSidebarOpen = false;
     sidebar.style.transform = "translateX(-100%)";
     updateHeaderStyles();
+    resetHamburgerIcon(); // Återställ ikonen
   }
 
   if (
@@ -128,6 +137,25 @@ window.addEventListener("click", (e) => {
 closeCartSidebarButton.addEventListener("click", () => {
   isCartSidebarOpen = false;
   cartSidebar.style.transform = "translateX(100%)";
+  updateHeaderStyles();
+});
+
+// Lägg till hover-funktionalitet för headern
+header.addEventListener("mouseenter", () => {
+  header.classList.remove("bg-transparent", "text-white");
+  header.classList.add("bg-white", "text-black");
+
+  logoImg.src = "/images/logo.svg";
+  loginImg.src = "/images/login.svg";
+  cartImg.src = "/images/cart.svg";
+
+  logoImgDesktop.src = "/images/logo.svg";
+  loginImgDesktop.src = "/images/login.svg";
+  cartImgDesktop.src = "/images/cart.svg";
+});
+
+header.addEventListener("mouseleave", () => {
+  // Återställ stilen beroende på om sidomenyn eller varukorgens meny är öppen
   updateHeaderStyles();
 });
 

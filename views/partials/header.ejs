@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/javascript/main.js" defer></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body class="relative">
+    <!-- Header -->
+    <header
+      id="header"
+      class="fixed top-0 left-0 w-full z-50 bg-transparent text-white transition-all duration-300"
+    >
+      <div class="flex items-center justify-between px-4 md:px-10 py-4">
+        <!-- Hamburger Menu and Sidebar for <1024px -->
+        <div class="flex items-center lg:hidden">
+          <button id="hamburger" class="p-2 focus:outline-none">
+            <span
+              id="hamburger-icon-top"
+              class="block w-6 h-0.5 bg-current mb-1 transition-transform duration-300"
+            ></span>
+            <span
+              id="hamburger-icon-middle"
+              class="block w-6 h-0.5 bg-current mb-1 transition-opacity duration-300"
+            ></span>
+            <span
+              id="hamburger-icon-bottom"
+              class="block w-6 h-0.5 bg-current transition-transform duration-300"
+            ></span>
+          </button>
+        </div>
+
+        <!-- Logo Centered -->
+        <div class="absolute left-1/2 transform -translate-x-1/2">
+          <a href="#">
+            <img
+              src="/images/logo-white.svg"
+              alt="Logo"
+              class="h-8"
+              id="logo-img"
+            />
+          </a>
+        </div>
+
+        <!-- Icons for <1024px -->
+        <div class="flex items-center lg:hidden space-x-4">
+          <a href="#">
+            <img
+              src="/images/login-white.svg"
+              alt="Login"
+              class="h-6"
+              id="login-img"
+            />
+          </a>
+          <a href="#">
+            <img
+              src="/images/cart-white.svg"
+              alt="Cart"
+              class="h-6"
+              id="cart-img"
+            />
+          </a>
+        </div>
+
+        <!-- Desktop Menu for >1024px -->
+        <div class="hidden lg:flex items-center justify-between w-full">
+          <div class="flex items-center space-x-6">
+            <a href="#" class="text-current text-lg">Shop</a>
+            <a href="#" class="text-current text-lg">About</a>
+            <a href="#" class="text-current text-lg">Contact</a>
+            <a
+              id="admin-link-desktop"
+              href="#"
+              class="text-current text-lg hidden"
+              >Admin</a
+            >
+          </div>
+
+          <div class="absolute left-1/2 transform -translate-x-1/2">
+            <a href="#">
+              <img
+                src="/images/logo-white.svg"
+                alt="Logo"
+                class="h-8"
+                id="logo-img-desktop"
+              />
+            </a>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <div class="relative w-48">
+              <div class="search-container">
+                <form action="/search" method="GET" class="search-input">
+                  <input
+                    type="text"
+                    name="q"
+                    placeholder="Search..."
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none text-black"
+                  />
+                </form>
+              </div>
+            </div>
+            <a href="#">
+              <img
+                src="/images/login-white.svg"
+                alt="Login"
+                class="h-6"
+                id="login-img-desktop"
+              />
+            </a>
+            <a href="#">
+              <img
+                src="/images/cart-white.svg"
+                alt="Cart"
+                class="h-6"
+                id="cart-img-desktop"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar below header -->
+    <div
+      id="sidebar"
+      class="fixed z-50 top-[62px] left-0 h-[calc(100%-4rem)] w-full sm:w-1/3 bg-white text-black transform -translate-x-full transition-transform duration-300"
+    >
+      <ul class="mt-2 space-y-4 px-4">
+        <li class="mt-4">
+          <div class="search-container">
+            <form action="/search" method="GET" class="search-input">
+              <input
+                type="text"
+                name="q"
+                placeholder="Search..."
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none text-black"
+              />
+            </form>
+          </div>
+        </li>
+        <li><a href="#" class="block text-lg">Shop</a></li>
+        <li><a href="#" class="block text-lg">About</a></li>
+        <li><a href="#" class="block text-lg">Contact</a></li>
+        <li id="admin-link" class="hidden">
+          <a href="#" class="block text-lg">Admin</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div
+      id="cart-sidebar"
+      class="fixed top-0 right-0 h-full w-full md:w-2/5 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50"
+    >
+      <div class="flex justify-between items-center p-6">
+        <h2 class="text-2xl font-bold">Your Cart</h2>
+        <button
+          id="close-cart-sidebar"
+          class="text-gray-500 hover:text-black text-3xl"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="p-6">
+        <!-- Cart Content -->
+        <p>Your cart is empty.</p>
+      </div>
+    </div>
+
+    <!-- Hero section -->
+    <section>
+      <div class="relative bg-black h-[90vh] flex flex-col sm:flex-row">
+        <img
+          src="/images/hero2.jpg"
+          alt="hero image womens fashion"
+          class="h-full w-full object-cover object-top sm:w-1/2"
+        />
+        <img
+          src="/images/hero1.jpg"
+          alt="hero image mens fashion"
+          class="hidden sm:block h-full w-full object-cover object-top sm:w-1/2"
+        />
+        <a
+          href="#"
+          class="absolute left-1/2 top-2/3 transform -translate-x-1/2 -translate-y-1/2 px-6 py-3 text-black bg-gray-100 hover:bg-black hover:text-white transition-all text-center"
+          >Shop</a
+        >
+      </div>
+    </section>
+
+    <!-- Bakgrund så man kan scrolla -->
+    <div class="h-[2000px]"></div>
+  </body>
+</html>
