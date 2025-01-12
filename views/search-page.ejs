@@ -14,9 +14,9 @@
     <header><%- include('partials/header') %></header>
 
     <!-- Main Content -->
-    <main class="container mx-auto p-6">
+    <main class="container mx-auto p-6 mt-28">
       <h1 class="text-xl font-semibold mb-4">
-        Hittade <%= results.length %> produkter
+        Hittade <%= results.length %> produkt <%= results.length > 1 ? 'er' : '' %>
       </h1>
 
 
@@ -33,7 +33,7 @@
           <div class="p-4">
             <h2 class="text-lg font-medium"><%= product.productName %></h2>
             <p class="text-sm text-gray-500"><%= product.brand %></p>
-            <p class="text-sm font-semibold text-indigo-600">
+            <p class="text-sm font-semibold">
               <%= product.price %> SEK
             </p>
           </div>
