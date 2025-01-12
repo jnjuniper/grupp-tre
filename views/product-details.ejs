@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ProductName </title> 
+    <title><%= product.name%></title> 
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -14,23 +14,89 @@
   <body>
     <header><%- include('partials/header') %></header>
 
-    <main class="container mx-auto px-4 md:px-10 py-10">
-      <div class="flex flex-wrap -mx-4">
-        <div class="w-full md:w-1/2 px-4">
-          <img
+    <main class="container mx-auto px-4 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <img
             src="<%= product.image %>"
             alt="<%= product.name %>"
-            class="w-full h-auto"
+            class="w-full rounded-lg"
           />
         </div>
-        <div class="w-full md:w-1/2 px-4">
-          <h1 class="text-2xl font-bold mb-4"><%= product.name %></h1>
-          <p class="text-lg mb-4"><%= product.description %></p>
-          <p class="text-lg font-bold mb-4">$<%= product.price %></p>
-          <button
-            class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800"
-          >
-            Add to Cart
+        <div>
+          <img
+            src="<%= product.secondaryImage1 || product.image %>"
+            alt="<%= product.name %>"
+            class="w-full rounded-lg"
+          />
+        </div>
+        <div>
+          <img
+            src="<%= product.secondaryImage2 || product.image %>"
+            alt="<%= product.name %>"
+            class="w-full rounded-lg"
+          />
+        </div>
+        <div>
+          <img
+            src="<%= product.secondaryImage3 || product.image %>"
+            alt="<%= product.name %>"
+            class="w-full rounded-lg"
+          />
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-3xl font-bold mb-4"><%= product.name %></h1>
+        <div class="flex justify-between items-center bm-6">
+          <span class="text-xl text-gray-800 font-semibold">$<%= product.price %></span>
+        </div>
+        <p class="text-gray-700 text-sm mb-6">
+          <%= product.description %>
+        </p>
+        <div class="mb-6">
+          <h2 class="font-semibold mb-2">Size</h2>
+          <div class="grid grid-cols-4 gap-2">
+            <% product.sizes.forEach(function(size) { %>
+            <button
+              class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200"
+            >
+              <%= size %>
+            </button>
+            <% }) %>
+          </div>
+        </div>
+
+        <!-- Add to Cart Button -->
+        <button
+          class="w-full bg-black text-white py-3 rounded-md text-lg hover:bg-gray-800"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+
+    <!-- Related Products Section -->
+     <section class="mt-10">
+      <h2 class="text-2xl font-bold mb-6"> Related Products</h2>
+      <div class="flex space-x-4 overflow-x-scroll">
+        <% relatedProducts.forEach(function(related) {%>
+        <div class='min-w[15opx] flex-shrink-0'>
+          <img
+          src="<%= related.image %>"
+          alt="<%= related.name %>"
+          class="rounded-lg mb-2"
+          />
+          <h3 class="text-sm font-semibold"><%= related.name %></h3>
+          <p class="text-xs text-gray-600"><%= related.brand %></p>
+          <p class="text-sm font-bold">$<%= related.price %></p>
+        </div>
+      <% }) %>
+      </div>
+      
+     </section>
+    </main>
           </button>
         </div>
       </div>
