@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       })
       .then((products) => {
-        products.forEach((product) => {
+        products
+        .filter((product) => product.isNew === true)
+        .forEach((product) => {
           const productCard = createProductCard(product);
           productGrid.appendChild(productCard);
         });
