@@ -24,3 +24,19 @@ We will be using Javascript, other technologies such as database, styling (Tailw
 
 
 ❗ All created branches should be named related to the task. Such as ''Feature/XXX'' ''Fix//XXX'' ❗
+
+
+
+
+
+Install dependencies
+
+```
+npm install
+npm i nodemon
+npm i better-sqlite3
+npm install express-session
+npm install connect-sqlite3
+npm install bcrypt
+
+```

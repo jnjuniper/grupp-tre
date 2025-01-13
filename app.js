@@ -3,11 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productsRoute = require('./routes/products,db.js');
 var contactRouter = require('./routes/contact');
+var adminLogInRouter = require('./routes/admin/log-in'); // Anpassa sökvägen om nödvändigt
+
 
 var app = express();
 
@@ -21,10 +25,41 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(
+  session({
+    store: new SQLiteStore({ db: 'sessions.db', dir: path.join(__dirname, 'db') }),
+    secret: 'yourSecretKey',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 3600000 }, // 1 hour
+  })
+);
+
+app.use((req, res, next) => {
+  res.locals.isLoggedIn = false;
+  next();
+});
+
+app.use((req, res, next) => {
+  res.locals.isLoggedIn = !!req.session.adminId; 
+  next();
+});
+
+app.use('/admin', (req, res, next) => {
+  if (!req.session.adminId && req.method === 'GET') {
+    return res.redirect('/');
+  }
+  next();
+});
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(productsRoute);
 app.use('/contact', contactRouter);
+app.use('/admin', adminLogInRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
