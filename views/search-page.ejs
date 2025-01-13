@@ -1,11 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/public/javascript/main.js"></script>
   </head>
 
-  <body>
-    
+  <body class="bg-gray-100 text-gray-900">
+
+    <!-- Header -->
+    <header><%- include('partials/header') %></header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 mt-28">
+      <% if (results.length > 0) { %>
+      <h1 class="text-xl font-semibold mb-4">
+        Hittade <%= results.length %> produkter
+      </h1>
+
+
+      <!-- Product Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <% results.forEach(product => { %>
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+          <img
+            src="<%= product.image %>"
+            alt="<%= product.productName %>"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h2 class="text-lg font-medium"><%= product.productName %></h2>
+            <p class="text-sm text-gray-500"><%= product.brand %></p>
+            <p class="text-sm font-semibold">
+              <%= product.price %> SEK
+            </p>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+      <% } else { %>
+        <p class="text-center text-gray-500 pt-16">
+          Inga produkter matchade din sökning.
+        </p>
+      <% } %>
+    </main>
   </body>
 </html>

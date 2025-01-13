@@ -1,8 +1,6 @@
 const header = document.getElementById("header");
 const hamburger = document.getElementById("hamburger");
 const sidebar = document.getElementById("sidebar");
-const adminLink = document.getElementById("admin-link");
-const adminLinkDesktop = document.getElementById("admin-link-desktop");
 const hamburgerIconTop = document.getElementById("hamburger-icon-top");
 const hamburgerIconMiddle = document.getElementById("hamburger-icon-middle");
 const hamburgerIconBottom = document.getElementById("hamburger-icon-bottom");
@@ -20,12 +18,6 @@ const closeCartSidebarButton = document.getElementById("close-cart-sidebar");
 
 let isSidebarOpen = false;
 let isCartSidebarOpen = false;
-let isLoggedIn = false;
-
-if (isLoggedIn) {
-  adminLink.classList.remove("hidden");
-  adminLinkDesktop.classList.remove("hidden");
-}
 
 const updateHeaderStyles = () => {
   // Kontrollera om sidan är startsidan eller "about"
@@ -186,6 +178,111 @@ closeCartSidebarButton.addEventListener("click", () => {
 });
 
 
+
+// Login/logout functionality
+const loginPopup = document.getElementById("login-popup");
+const loginForm = document.getElementById("login-form");
+const closeLoginPopupButton = document.getElementById("close-login-popup");
+const loginIconMobile = document.getElementById("login-icon-mobile");
+const loginIconDesktop = document.getElementById("login-icon-desktop");
+const logoutButton = document.getElementById("logout-btn");
+
+let isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+
+const showLoginPopup = () => {
+  if (loginPopup) {
+    loginPopup.classList.remove("hidden");
+  }
+};
+
+const closeLoginPopup = () => {
+  if (loginPopup) {
+    loginPopup.classList.add("hidden"); 
+  }
+};
+
+const updateUI = () => {
+  const adminLink = document.getElementById("admin-link");
+  const adminLinkDesktop = document.getElementById("admin-link-desktop");
+
+  if (isLoggedIn) {
+    adminLink?.classList.remove("hidden");
+    adminLinkDesktop?.classList.remove("hidden");
+  } else {
+    adminLink?.classList.add("hidden");
+    adminLinkDesktop?.classList.add("hidden");
+  }
+};
+
+if (loginIconMobile) {
+  loginIconMobile.addEventListener("click", (e) => {
+    e.preventDefault();
+    showLoginPopup();
+  });
+}
+
+if (loginIconDesktop) {
+  loginIconDesktop.addEventListener("click", (e) => {
+    e.preventDefault();
+    showLoginPopup();
+  });
+}
+
+if (logoutButton) {
+  logoutButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    fetch("/admin/logout", { method: "POST" })
+      .then(() => {
+        sessionStorage.removeItem("isLoggedIn");
+        isLoggedIn = false;
+        location.reload(); 
+      })
+      .catch((err) => console.error("Logout error:", err));
+  });
+}
+
+if (closeLoginPopupButton) {
+  closeLoginPopupButton.addEventListener("click", closeLoginPopup);
+}
+
+if (loginPopup) {
+  window.addEventListener("click", (e) => {
+    if (e.target === loginPopup) closeLoginPopup();
+  });
+}
+
+
+if (loginForm) {
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(loginForm);
+    const data = Object.fromEntries(formData.entries());
+
+    fetch("/admin/log-in", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Invalid username or password.");
+        return res.json();
+      })
+      .then(() => {
+        sessionStorage.setItem("isLoggedIn", "true");
+        isLoggedIn = true;
+        location.reload();
+      })
+      .catch((err) => {
+        const loginError = document.getElementById("login-error");
+        if (loginError) {
+          loginError.textContent = err.message;
+          loginError.classList.remove("hidden");
+        }
+      });
+  });
+}
+
+
  // Contact form
  const contactForm = document.getElementById("contactForm");
  const popUp = document.getElementById("popUp");
@@ -206,3 +303,4 @@ closeCartSidebarButton.addEventListener("click", () => {
    contactForm.reset();
  });
 
+updateUI();
