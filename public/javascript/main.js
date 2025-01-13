@@ -303,7 +303,4 @@ if (loginForm) {
    contactForm.reset();
  });
 
-
 updateUI();
-
-
