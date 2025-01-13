@@ -10,7 +10,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productsRoute = require('./routes/products,db.js');
 var contactRouter = require('./routes/contact');
+var searchRouter = require("./routes/search-page");
 var adminLogInRouter = require('./routes/admin/log-in'); // Anpassa sökvägen om nödvändigt
+
 
 
 var app = express();
@@ -57,6 +59,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(productsRoute);
 app.use('/contact', contactRouter);
+app.use(searchRouter);
 app.use('/admin', adminLogInRouter);
 
 
