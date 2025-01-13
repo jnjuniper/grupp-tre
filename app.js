@@ -10,6 +10,7 @@ var productsRoute = require('./routes/products,db.js');
 var contactRouter = require('./routes/contact');
 var searchRouter = require("./routes/search-page");
 
+
 var app = express();
 
 // view engine setup
@@ -27,6 +28,7 @@ app.use('/users', usersRouter);
 app.use(productsRoute);
 app.use('/contact', contactRouter);
 app.use(searchRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
