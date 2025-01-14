@@ -25,24 +25,34 @@ document.addEventListener("DOMContentLoaded", () => {
         productGrid.innerHTML = "<p class='text-center'>Unable to load products.</p>";
       });
   
-    function createProductCard(product) {
-      const card = document.createElement("div");
-      card.classList.add("bg-white", "rounded-lg", "shadow-md", "p-4", "text-center");
-  
-      card.innerHTML = `
-        <img 
-          src="${product.image || '/images/placeholder.png'}" 
-          alt="${product.productName}" 
-          class="h-40 w-full object-cover mb-4 rounded">
-        <h3 class="text-lg font-semibold mb-2">${product.productName}</h3>
-        <p class="text-gray-600 mb-4">${product.brand || "Unknown Brand"}</p>
-        <p class="text-xl font-bold text-gray-800 mb-4">${product.price}</p>
-        <button 
-          class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800">
-          Lägg till i varukorg
-        </button>
-      `;
-  
-      return card;
-    }
+      function createProductCard(product) {
+        const productCard = document.createElement('div');
+        productCard.className =
+          'p-4 flex flex-col items-center justify-between bg-white rounded-lg shadow-lg hover:shadow-xl transition-all';
+      
+        productCard.innerHTML = `
+          <div class="relative group">
+            
+            <img
+              src="${product.image}"
+              alt="${product.productName}"
+              class="w-full h-64 object-cover rounded-t-lg group-hover:hidden"
+            />
+      
+            
+            <img
+              src="${product.secondaryImage1}"
+              alt="${product.productName} alternate view"
+              class="w-full h-64 object-cover rounded-t-lg hidden group-hover:block"
+            />
+          </div>
+          <div class="p-4 flex flex-col items-start">
+            <h3 class="text-lg font-bold text-gray-800">${product.productName}</h3>
+            <p class="text-sm text-gray-600">${product.brand}</p>
+            <p class="text-lg font-semibold text-gray-900">${product.price} kr</p>
+          </div>
+        `;
+      
+        return productCard;
+      }
   });
