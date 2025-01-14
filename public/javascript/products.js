@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <h3 class="text-lg font-bold text-gray-800">${product.productName}</h3>
             <p class="text-sm text-gray-600">${product.brand}</p>
             <p class="text-lg font-semibold text-gray-900">${product.price} kr</p>
-            <p class="text-sm text-gray-500">${product.productDescription}</p>
           </div>
         `;
       
