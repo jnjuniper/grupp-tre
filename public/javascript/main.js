@@ -293,17 +293,12 @@ if (loginForm) {
    event.preventDefault();
    popUp.classList.remove("hidden");
    popUp.classList.add("flex");
-   pageContent.classList.add("blur");
  });
 
  closeButton.addEventListener("click", () => {
    popUp.classList.add("hidden");
    popUp.classList.remove("flex");
-   pageContent.classList.remove("blur");
    contactForm.reset();
  });
 
-
 updateUI();
-
-

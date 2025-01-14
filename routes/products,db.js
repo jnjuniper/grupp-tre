@@ -8,7 +8,11 @@ const db = new Database('./db/products.db');
 
 router.get('/api/products', (req, res) => {
   try {
-    const products = db.prepare('SELECT * FROM products').all();
+    const rows = db.prepare('SELECT * FROM products').all();
+    const products = rows.map((row) => ({
+      ...row,
+      isNew: row.isNew === "1",
+    }));
     res.json(products);
   } catch (error) {
     console.error('Error fetching products:', error.message);

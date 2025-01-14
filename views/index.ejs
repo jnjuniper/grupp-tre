@@ -4,6 +4,8 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/javascript/products.js" defer></script>
+    
     <style>
       body {
         margin: 0;
@@ -13,7 +15,6 @@
   </head>
   <body>
     <header><%- include('partials/header') %></header>
-        <!-- Hero section -->
         <section>
           <div class="relative bg-black h-[90vh] flex flex-col sm:flex-row">
             <img
@@ -31,6 +32,15 @@
               class="absolute left-1/2 top-2/3 transform -translate-x-1/2 -translate-y-1/2 px-6 py-3 text-black bg-gray-100 hover:bg-black hover:text-white transition-all text-center"
               >Shop</a
             >
+          </div>
+        </section>
+
+        <section id="product-grid-section" class="py-10">
+          <div class="container mx-auto px-4">
+            <h2 class="text-center text-3xl font-bold mb-6">Nyheter</h2>
+            <div id="product-grid" 
+                 class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            </div>
           </div>
         </section>
   </body>
