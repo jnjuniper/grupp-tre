@@ -13,6 +13,7 @@ var contactRouter = require('./routes/contact');
 var searchRouter = require("./routes/search-page");
 var adminLogInRouter = require('./routes/admin/log-in');
 var adminRouter = require('./routes/admin/admin');
+var adminEditRouter = require('./routes/admin/admin-edit');
 
 
 var app = express();
@@ -62,6 +63,8 @@ app.use('/contact', contactRouter);
 app.use(searchRouter);
 app.use('/admin', adminLogInRouter);
 app.use('/admin', adminRouter);
+app.use('/admin-edit', adminEditRouter);
+
 
 
 // catch 404 and forward to error handler

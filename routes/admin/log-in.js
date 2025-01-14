@@ -6,7 +6,6 @@ const Database = require('better-sqlite3');
 const dbPath = path.join(__dirname, '../../db/admins.db');
 const adminDb = new Database(dbPath);
 
-// POST: Hantera inloggning
 router.post('/log-in', (req, res) => {
     console.log('Request body:', req.body);
 
@@ -35,7 +34,6 @@ router.post('/log-in', (req, res) => {
     }
   });
 
-// POST: Hantera utloggning
 router.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {

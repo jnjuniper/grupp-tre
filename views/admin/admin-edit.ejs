@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <script src="/javascript/admin-edit-products.js" defer></script>
+    <link rel="stylesheet" href="/stylesheets/style-admin.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Edit Product</h1>
+    </header>
+    <main>
+      <section>
+        <form id="edit-product-form">
+          <div>
+            <label>Product Name</label>
+            <input
+              type="text"
+              name="productName"
+              value="<%= product.productName %>"
+              required
+            />
+          </div>
+
+          <div>
+            <label>Price</label>
+            <input
+              type="text"
+              name="price"
+              value="<%= product.price %>"
+              required
+            />
+          </div>
+
+          <div>
+            <label>Image</label>
+            <input
+              type="text"
+              name="image"
+              value="<%= product.image %>"
+            />
+          </div>
+
+          <div>
+            <label>Secondary Image 1</label>
+            <input
+              type="text"
+              name="secondaryImage1"
+              value="<%= product.secondaryImage1 %>"
+            />
+          </div>
+
+          <div>
+            <label>Secondary Image 2</label>
+            <input
+              type="text"
+              name="secondaryImage2"
+              value="<%= product.secondaryImage2 %>"
+            />
+          </div>
+
+          <div>
+            <label>Secondary Image 3</label>
+            <input
+              type="text"
+              name="secondaryImage3"
+              value="<%= product.secondaryImage3 %>"
+            />
+          </div>
+
+          <div>
+            <label>Brand</label>
+            <input
+              type="text"
+              name="brand"
+              value="<%= product.brand %>"
+              required
+            />
+          </div>
+
+          <div>
+            <label>Description</label>
+            <textarea
+              name="productDescription"
+              required
+            ><%= product.productDescription %></textarea>
+          </div>
+
+          <div>
+            <label>Is New</label>
+            <select name="isNew">
+              <option value="true" <%= product.isNew === 'true' ? 'selected' : '' %>>Yes</option>
+              <option value="false" <%= product.isNew === 'false' ? 'selected' : '' %>>No</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Category</label>
+            <input
+              type="text"
+              name="category"
+              value="<%= product.category %>"
+              required
+            />
+          </div>
+
+          <button type="submit">Update Product</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
