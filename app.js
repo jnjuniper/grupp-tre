@@ -14,6 +14,7 @@ var searchRouter = require("./routes/search-page");
 var adminLogInRouter = require('./routes/admin/log-in');
 var adminRouter = require('./routes/admin/admin');
 var adminEditRouter = require('./routes/admin/admin-edit');
+var teamRoutes = require('./routes/team');
 
 
 var app = express();
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(
   session({
@@ -64,6 +66,7 @@ app.use(searchRouter);
 app.use('/admin', adminLogInRouter);
 app.use('/admin', adminRouter);
 app.use('/admin-edit', adminEditRouter);
+app.use('/team', teamRoutes);
 
 
 
