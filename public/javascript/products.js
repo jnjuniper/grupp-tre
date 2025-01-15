@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
             />
           </div>
           <div class="p-4 flex flex-col items-start">
-            <h3 class="text-lg font-bold text-gray-800">${product.productName}</h3>
-            <p class="text-sm text-gray-600">${product.brand}</p>
-            <p class="text-lg font-semibold text-gray-900">${product.price} kr</p>
+            <h3 class="text-lg font-bold text-gray-800 w-full text-center">${product.productName}</h3>
+            <p class="text-sm text-gray-600 w-full text-center">${product.brand}</p>
+            <p class="text-lg font-semibold text-gray-900 w-full text-center">${product.price} kr</p>
           </div>
         `;
       
