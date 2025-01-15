@@ -6,46 +6,62 @@
     <title><%= title %></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/public/javascript/main.js"></script>
+    <script src="/public/javascript/products.js"></script>
   </head>
 
-  <body class="bg-gray-100 text-gray-900">
+  <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
 
     <!-- Header -->
     <header><%- include('partials/header') %></header>
 
     <!-- Main Content -->
-    <main class="container mx-auto p-6 mt-28">
+    <main class="container mx-auto p-6 mt-28 flex-grow">
       <% if (results.length > 0) { %>
         <h1 class="text-xl font-semibold mb-4">
-          Hittade <%= results.length %> produkter
+          Hittade <%= results.length %> produkt<%= results.length > 1 ? 'er' : '' %>
         </h1>
 
         <!-- Product Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           <% results.forEach(product => { %>
-            <div class="bg-white shadow rounded-lg overflow-hidden">
-              <div class="w-full h-48 relative">
+
+            <!-- Product Card -->
+            <a 
+              href="/product/<%= product.id %>" 
+              class="block bg-white shadow rounded-lg overflow-hidden transform transition-all duration-300 hover:shadow-lg hover:scale-105">
+              <div class="w-full h-48 relative group">
+
+                <!-- Standardbild -->
                 <img
                   src="<%= product.image %>"
                   alt="<%= product.productName %>"
-                  class="absolute inset-0 w-full h-full object-contain"
+                  class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
+                />
+                <!-- Hoverbild -->
+                <img
+                  src="<%= product.secondaryImage1 %>"
+                  alt="<%= product.productName %>"
+                  class="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 />
               </div>
+
+              <!-- Produktinformation -->
               <div class="p-4">
-                <!-- Product Name -->
+                <!-- Produktnamn -->
                 <h2 class="text-lg font-medium break-words">
                   <%= product.productName %>
                 </h2>
-                <!-- Product Brand -->
+                <!-- Produktmärke -->
                 <p class="text-sm text-gray-500 break-words">
                   <%= product.brand %>
                 </p>
-                <!-- Product Price -->
+                <!-- Produktpris -->
                 <p class="text-sm font-semibold">
                   <%= product.price %>
                 </p>
               </div>
-            </div>
+            </a>
+
           <% }); %>
         </div>
       <% } else { %>

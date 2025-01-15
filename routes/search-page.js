@@ -1,5 +1,5 @@
 const express = require("express");
-const Database = require("better-sqlite3"); // Importera better-sqlite3
+const Database = require("better-sqlite3");
 const router = express.Router();
 
 // Anslut till SQLite-databasen
@@ -7,7 +7,7 @@ const db = new Database("./db/products.db", { verbose: console.log });
 
 // Route för att hantera sökningen
 router.get("/search", (req, res) => {
-  const searchQuery = req.query.q; // Hämta sökfrågan från URL-parametern
+  const searchQuery = req.query.q;
 
   if (!searchQuery || searchQuery.trim() === "") {
     return res.render("search-page", { 
@@ -19,14 +19,14 @@ router.get("/search", (req, res) => {
   }
 
   try {
-    // Sök efter produkter som matchar sökfrågan
     const sql = `
-      SELECT productName, price, image, brand, productDescription, isNew, category
+      SELECT productName, price, image, secondaryImage1, brand, productDescription, isNew, category
       FROM products
       WHERE productName LIKE ?`;
     const results = db.prepare(sql).all(`%${searchQuery}%`);
 
-    // Rendera söksidan med resultaten
+    console.log("Search Results:", results); // Debugging-logg
+
     res.render("search-page", { 
       title: "Sökresultat", 
       query: searchQuery, 
