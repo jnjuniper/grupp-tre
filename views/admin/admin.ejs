@@ -96,25 +96,27 @@
                   <%= product.isNew == true || product.isNew == 1 ? 'Yes' : 'No'
                   %>
                 </td>
-                <td class="border border-black px-4 space-x-2">
-                  <a
-                    href="/admin-edit/<%= product.id %>"
-                    class="p-1 md:px-4 md:py-2 border border-blue-500 bg-white text-blue-500 hover:bg-blue-500 hover:text-white transition-all text-center rounded"
-                  >
-                    Edit
-                  </a>
-                  <form
-                    action="/admin/delete/<%= product.id %>"
-                    method="POST"
-                    class="inline-block"
-                  >
-                    <button
-                      type="submit"
-                      class="p-1 md:px-4 md:py-2 border border-red-500 bg-white text-red-500 hover:bg-red-500 hover:text-white transition-all text-center rounded"
+                <td class="border border-black">
+                  <div class="flex flex-col space-y-2 px-2">
+                    <a
+                      href="/admin-edit/<%= product.id %>"
+                      class="inline-block w-full p-1 md:px-4 md:py-2 border border-blue-500 bg-white text-blue-500 hover:bg-blue-500 hover:text-white transition-all text-center rounded"
                     >
-                      Delete
-                    </button>
-                  </form>
+                      Edit
+                    </a>
+                    <form
+                      action="/admin/delete/<%= product.id %>"
+                      method="POST"
+                      class="w-full"
+                    >
+                      <button
+                        type="submit"
+                        class="w-full p-1 md:px-4 md:py-2 border border-red-500 bg-white text-red-500 hover:bg-red-500 hover:text-white transition-all text-center rounded"
+                      >
+                        Delete
+                      </button>
+                    </form>
+                  </div>
                 </td>
               </tr>
               <% }); %>
