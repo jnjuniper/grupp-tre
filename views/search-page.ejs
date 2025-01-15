@@ -4,54 +4,75 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link
-      rel="icon"
-      href="/images/logo.svg"
-      media="(prefers-color-scheme: light)"
-    />
-
-    <link
-      rel="icon"
-      href="/images/logo-white.svg"
-      media="(prefers-color-scheme: dark)"
-    />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/public/javascript/main.js"></script>
+    <script src="/public/javascript/products.js"></script>
   </head>
 
-  <body class="bg-gray-100 text-gray-900">
+  <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
+
     <!-- Header -->
     <header><%- include('partials/header') %></header>
 
     <!-- Main Content -->
-    <main class="container mx-auto p-6 mt-28">
+    <main class="container mx-auto p-6 mt-28 flex-grow">
       <% if (results.length > 0) { %>
-      <h1 class="text-xl font-semibold mb-4">
-        Hittade <%= results.length %> produkter
-      </h1>
+        <h1 class="text-xl font-semibold mb-4">
+          Hittade <%= results.length %> produkt<%= results.length > 1 ? 'er' : '' %>
+        </h1>
 
-      <!-- Product Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-        <% results.forEach(product => { %>
-        <div class="bg-white shadow rounded-lg overflow-hidden">
-          <img
-            src="<%= product.image %>"
-            alt="<%= product.productName %>"
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-4">
-            <h2 class="text-lg font-medium"><%= product.productName %></h2>
-            <p class="text-sm text-gray-500"><%= product.brand %></p>
-            <p class="text-sm font-semibold"><%= product.price %></p>
-          </div>
+        <!-- Product Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          <% results.forEach(product => { %>
+
+            <!-- Product Card -->
+            <a 
+              href="/product/<%= product.id %>" 
+              class="block bg-white shadow rounded-lg overflow-hidden transform transition-all duration-300 hover:shadow-lg hover:scale-105">
+              <div class="w-full h-48 relative group">
+
+                <!-- Standardbild -->
+                <img
+                  src="<%= product.image %>"
+                  alt="<%= product.productName %>"
+                  class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
+                />
+                <!-- Hoverbild -->
+                <img
+                  src="<%= product.secondaryImage1 %>"
+                  alt="<%= product.productName %>"
+                  class="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                />
+              </div>
+
+              <!-- Produktinformation -->
+              <div class="p-4">
+                <!-- Produktnamn -->
+                <h2 class="text-lg font-medium break-words">
+                  <%= product.productName %>
+                </h2>
+                <!-- Produktmärke -->
+                <p class="text-sm text-gray-500 break-words">
+                  <%= product.brand %>
+                </p>
+                <!-- Produktpris -->
+                <p class="text-sm font-semibold">
+                  <%= product.price %>
+                </p>
+              </div>
+            </a>
+
+          <% }); %>
         </div>
-        <% }); %>
-      </div>
       <% } else { %>
-      <p class="text-center text-gray-500 pt-16">
-        Inga produkter matchade din sökning.
-      </p>
+        <!-- No Products Message -->
+        <p class="text-center text-gray-500 pt-16">
+          Inga produkter matchade din sökning.
+        </p>
       <% } %>
     </main>
+
+    <!-- Footer -->
+    <footer><%- include('partials/footer') %></footer>
   </body>
 </html>
