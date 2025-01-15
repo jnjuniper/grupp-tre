@@ -2,10 +2,21 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link
+      rel="icon"
+      href="/images/logo.svg"
+      media="(prefers-color-scheme: light)"
+    />
+
+    <link
+      rel="icon"
+      href="/images/logo-white.svg"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/javascript/products.js" defer></script>
-    
+
     <style>
       body {
         margin: 0;
@@ -15,34 +26,35 @@
   </head>
   <body>
     <header><%- include('partials/header') %></header>
-        <section>
-          <div class="relative bg-black h-[90vh] flex flex-col sm:flex-row">
-            <img
-              src="/images/hero2.jpg"
-              alt="hero image womens fashion"
-              class="h-full w-full object-cover object-top sm:w-1/2"
-            />
-            <img
-              src="/images/hero1.jpg"
-              alt="hero image mens fashion"
-              class="hidden sm:block h-full w-full object-cover object-top sm:w-1/2"
-            />
-            <a
-              href="#"
-              class="absolute left-1/2 top-2/3 transform -translate-x-1/2 -translate-y-1/2 px-6 py-3 text-black bg-gray-100 hover:bg-black hover:text-white transition-all text-center"
-              >Shop</a
-            >
-          </div>
-        </section>
+    <section>
+      <div class="relative bg-black h-[90vh] flex flex-col sm:flex-row">
+        <img
+          src="/images/hero2.jpg"
+          alt="hero image womens fashion"
+          class="h-full w-full object-cover object-top sm:w-1/2"
+        />
+        <img
+          src="/images/hero1.jpg"
+          alt="hero image mens fashion"
+          class="hidden sm:block h-full w-full object-cover object-top sm:w-1/2"
+        />
+        <a
+          href="#"
+          class="absolute left-1/2 top-2/3 transform -translate-x-1/2 -translate-y-1/2 px-6 py-3 text-black bg-gray-100 hover:bg-black hover:text-white transition-all text-center"
+          >Shop</a
+        >
+      </div>
+    </section>
 
-        <section id="product-grid-section" class="py-10">
-          <div class="container mx-auto px-4">
-            <h2 class="text-center text-3xl font-bold mb-6">Nyheter</h2>
-            <div id="product-grid" 
-                 class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            </div>
-          </div>
-        </section>
+    <section id="product-grid-section" class="py-10">
+      <div class="container mx-auto px-4">
+        <h2 class="text-center text-3xl font-bold mb-6">Nyheter</h2>
+        <div
+          id="product-grid"
+          class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        ></div>
+      </div>
+    </section>
   </body>
   <footer><%- include('partials/footer') %></footer>
 </html>
