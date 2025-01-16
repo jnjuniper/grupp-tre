@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/javascript/admin-add-products.js" defer></script>
+  </head>
+  <body>
+    <header class="flex items-center space-x-4 mb-4">
+      <a href="/admin"><img src="/images/back.svg" alt="back" class="h-10" onmouseover="this.src='/images/back-blue.svg';"
+        onmouseout="this.src='/images/back.svg';"></a>
+      <h1 class="text-2xl font-semibold">Back</h1>
+    </header>
+    <main>
+      <section class="px-4 sm:px-8 lg:px-14 py-8">
+        <form id="add-product-form" class="max-w-4xl mx-auto space-y-6 bg-white shadow-lg rounded-lg p-8">
+          <h2 class="text-2xl font-bold text-center mb-6">Add Product</h2>
+          
+          <div class="flex flex-col space-y-1">
+            <label for="productName" class="text-lg text-gray-900">Product Name</label>
+            <input
+              id="productName"
+              type="text"
+              name="productName"
+              class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              required
+            />
+          </div>
+          
+          <div class="flex flex-col space-y-1">
+            <label for="price" class="text-lg text-gray-900">Price</label>
+            <input
+              id="price"
+              type="text"
+              name="price"
+              class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              required
+            />
+          </div>
+
+          <div class="flex flex-col space-y-1">
+            <label for="image" class="text-lg text-gray-900">Image</label>
+            <input
+              id="image"
+              type="text"
+              name="image"
+              class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              required
+            />
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="flex flex-col space-y-1">
+              <label for="secondaryImage1" class="text-lg text-gray-900">Secondary Image 1</label>
+              <input
+                id="secondaryImage1"
+                type="text"
+                name="secondaryImage1"
+                class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              />
+            </div>
+            <div class="flex flex-col space-y-1">
+              <label for="secondaryImage2" class="text-lg text-gray-900">Secondary Image 2</label>
+              <input
+                id="secondaryImage2"
+                type="text"
+                name="secondaryImage2"
+                class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              />
+            </div>
+            <div class="flex flex-col space-y-1">
+              <label for="secondaryImage3" class="text-lg text-gray-900">Secondary Image 3</label>
+              <input
+                id="secondaryImage3"
+                type="text"
+                name="secondaryImage3"
+                class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col space-y-1">
+            <label for="brand" class="text-lg text-gray-900">Brand</label>
+            <input
+              id="brand"
+              type="text"
+              name="brand"
+              class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              required
+            />
+          </div>
+
+          <div class="flex flex-col space-y-1">
+            <label for="productDescription" class="text-lg text-gray-900">Description</label>
+            <textarea
+              id="productDescription"
+              name="productDescription"
+              class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              required
+            ></textarea>
+          </div>
+
+          <div class="flex flex-col space-y-1">
+            <label for="isNew" class="text-lg text-gray-900">Nyhet</label>
+            <select
+              id="isNew"
+              name="isNew"
+              class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            >
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col space-y-1">
+            <label for="category" class="text-lg text-gray-900">Category</label>
+            <input
+              id="category"
+              type="text"
+              name="category"
+              class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              required
+            />
+          </div>
+
+          <div class="text-center">
+            <button
+              type="submit"
+              class="w-full sm:w-auto border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-bold py-3 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              Add Product
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
