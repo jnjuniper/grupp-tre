@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const aboutContent = require('../data/about.js'); // Import the content data
+const aboutContent = require('../data/about.js');
 
-// Route to render the About page
 router.get('/', (req, res) => {
-  res.render('about', { aboutContent }); // Pass the data to the view
+  res.render('about', { aboutContent }); 
 });
 
-module.exports = router; // Export the router
+module.exports = router; 

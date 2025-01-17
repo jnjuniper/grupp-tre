@@ -12,6 +12,7 @@ const aboutContent = {
     },
     values: {
       title: "Our Values",
+      image: "/images/values.jpg",
       list: [
         {
           name: "Sustainability",
@@ -32,6 +33,7 @@ const aboutContent = {
     },
     goals: {
       title: "Our Goals",
+      image: "/images/goals.jpg",
       points: [
         "Empowering Conscious Choices: By providing transparency in our materials and processes, we empower our customers to make informed decisions that align with their values.",
         "Driving Innovation: We are continuously exploring innovative ways to reduce waste and promote circular fashion through recycling and upcycling initiatives.",
@@ -40,10 +42,12 @@ const aboutContent = {
     },
     whyChooseUs: {
       title: "Why Choose Us?",
+    
       description: [
         "When you shop with Grupp Tre, you are not just buying clothes—you are investing in a better future. Each purchase supports sustainable practices, ensures fair wages for workers, and helps preserve the environment for generations to come.",
         "Join us on our journey to make fashion a force for good. Together, we can create a world where luxury meets responsibility.",
       ],
+      image: '/images/us.jpg',
     },
   };
   

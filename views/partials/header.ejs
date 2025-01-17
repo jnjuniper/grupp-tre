@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
+    <title> <%= title %></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/javascript/main.js" defer></script>
     <style>
@@ -74,7 +74,7 @@
         <div class="hidden lg:flex items-center justify-between w-full">
           <div class="flex items-center space-x-6">
             <a href="#" class="text-current text-lg">Shop</a>
-            <a href="#" class="text-current text-lg">About</a>
+            <a href="/about" class="text-current text-lg">About</a>
             <a href="/contact" class="text-current text-lg">Contact</a>
             <a
               id="admin-link-desktop"
@@ -149,7 +149,7 @@
           </div>
         </li>
         <li><a href="#" class="block text-lg">Shop</a></li>
-        <li><a href="#" class="block text-lg">About</a></li>
+        <li><a href="/about" class="block text-lg">About</a></li>
         <li><a href="/contact" class="block text-lg">Contact</a></li>
         <li id="admin-link" class="<%= isLoggedIn ? '' : 'hidden' %>">
           <a href="/admin" class="block text-lg">Admin</a>
