@@ -20,12 +20,12 @@ router.get("/search", (req, res) => {
 
   try {
     const sql = `
-      SELECT productName, price, image, secondaryImage1, brand, productDescription, isNew, category
+      SELECT id, productName, price, image, secondaryImage1, brand, productDescription, isNew, category
       FROM products
       WHERE productName LIKE ?`;
     const results = db.prepare(sql).all(`%${searchQuery}%`);
 
-    console.log("Search Results:", results); // Debugging-logg
+    console.log("Search Results:", results);
 
     res.render("search-page", { 
       title: "Sökresultat", 
