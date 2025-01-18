@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= title %></title> 
+    <link
+      rel="icon"
+      href="/images/logo.svg"
+      media="(prefers-color-scheme: light)"
+    />
+
+    <link
+      rel="icon"
+      href="/images/logo-white.svg"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  
+  <body class="bg-slate-950 text-slate-50">
+    <header><%- include('partials/header') %></header>
+
+    <main class="max-w-7xl mx-auto p-6 mt-16">
+      <!-- Welcome Section -->
+      <section class="mb-12 text-center">
+        <h1 class="text-4xl font-bold text-slate-400 mb-4">
+          <%= aboutContent.welcome.title %>
+        </h1>
+        <p class="text-lg text-slate-400">
+          <%= aboutContent.welcome.description %>
+        </p>
+      </section>
+  
+      <!-- Vision Section -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-semibold text-slate-400 mb-6">
+          <%= aboutContent.vision.title %>
+        </h2>
+        <div class="flex flex-col md:flex-row items-center gap-6">
+          <p class="text-slate-400 text-lg flex-1">
+            <%= aboutContent.vision.description %>
+          </p>
+          <img src="<%= aboutContent.vision.image %>" alt="Vision" class="w-full md:w-1/2 rounded-lg shadow-md">
+        </div>
+      </section>
+  
+<!-- Values Section -->
+<section class="mb-12">
+  <h2 class="text-3xl font-semibold text-slate-400 mb-6">
+    <%= aboutContent.values.title %>
+  </h2>
+  <div class="flex flex-col md:flex-row items-center gap-6">
+    <!-- Image Section -->
+    <img
+      src="<%= aboutContent.values.image %>"
+      alt="Values Illustration"
+      class="w-full md:w-1/2 rounded-lg shadow-md"
+    />
+    <!-- Text Content -->
+    <ul class="space-y-4 flex-1">
+      <% aboutContent.values.list.forEach(value => { %>
+        <li>
+          <h3 class="text-xl font-bold text-slate-400">
+            <%= value.name %>
+          </h3>
+          <p class="text-lg text-slate-400">
+            <%= value.description %>
+          </p>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</section>
+
+  
+<!-- Goals Section -->
+<section class="mb-12">
+  <h2 class="text-3xl font-semibold text-slate-400 mb-6">
+    <%= aboutContent.goals.title %>
+  </h2>
+  <!-- Image Above Text -->
+  <img
+    src="<%= aboutContent.goals.image %>"
+    alt="Goals Illustration"
+    class="w-full rounded-lg shadow-md mb-6"
+  />
+  <ul class="list-disc list-inside text-lg text-slate-400 space-y-2">
+    <% aboutContent.goals.points.forEach(point => { %>
+      <li><%= point %></li>
+    <% }) %>
+  </ul>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="mb-12">
+  <h2 class="text-3xl font-semibold text-slate-400 mb-6">
+    <%= aboutContent.whyChooseUs.title %>
+  </h2>
+  <% aboutContent.whyChooseUs.description.forEach(paragraph => { %>
+    <p class="text-lg text-slate-400 mb-4">
+      <%= paragraph %>
+    </p>
+  <% }) %>
+  <!-- Image at the Bottom -->
+  <img
+    src="<%= aboutContent.whyChooseUs.image %>"
+    alt="Why Choose Us Illustration"
+    class="w-full rounded-lg shadow-md mt-6"
+  />
+</section>
+
+    </main>
+
+    <footer><%- include('partials/footer') %></footer>
+
+  </body>
+  </html>

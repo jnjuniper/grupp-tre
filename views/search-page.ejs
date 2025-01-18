@@ -17,17 +17,32 @@
     <!-- Main Content -->
     <main class="container mx-auto p-6 mt-28 flex-grow">
       <% if (results.length > 0) { %>
-        <h1 class="text-xl font-semibold mb-4">
-          Hittade <%= results.length %> produkt<%= results.length > 1 ? 'er' : '' %>
-        </h1>
+        <div class="flex items-center justify-between mb-4">
+          <h1 class="text-xl font-semibold">
+            Hittade <%= results.length %> produkt<%= results.length > 1 ? 'er' : '' %>
+          </h1>
+          <!-- Dropdown för sortering -->
+          <div>
+            <label for="sortDropdown" class="text-sm font-medium text-gray-700 mr-2">Sortera efter:</label>
+            <select
+              id="sortDropdown"
+              class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+              <option value="newest" <%= sort === 'newest' ? 'selected' : '' %>>Nyast först</option>
+              <option value="oldest" <%= sort === 'oldest' ? 'selected' : '' %>>Äldst först</option>
+              <option value="highest" <%= sort === 'highest' ? 'selected' : '' %>>Högst pris</option>
+              <option value="lowest" <%= sort === 'lowest' ? 'selected' : '' %>>Lägst pris</option>
+            </select>
+          </div>
+        </div>
 
         <!-- Product Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           <% results.forEach(product => { %>
 
             <!-- Product Card -->
             <a 
-              href="/product/<%= product.id %>" 
+              href="/products/<%= product.id %>"
               class="block bg-white shadow rounded-lg overflow-hidden transform transition-all duration-300 hover:shadow-lg hover:scale-105">
               <div class="w-full h-48 relative group">
 
@@ -57,7 +72,7 @@
                 </p>
                 <!-- Produktpris -->
                 <p class="text-sm font-semibold">
-                  <%= product.price %>
+                  <%= product.price %> SEK
                 </p>
               </div>
             </a>
@@ -74,5 +89,14 @@
 
     <!-- Footer -->
     <footer><%- include('partials/footer') %></footer>
+
+    <script>
+      document.getElementById("sortDropdown").addEventListener("change", function () {
+        const sortBy = this.value;
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set("sort", sortBy);
+        window.location.href = currentUrl.toString();
+      });
+    </script>
   </body>
 </html>
