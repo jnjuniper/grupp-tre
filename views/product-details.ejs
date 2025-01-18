@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= product.name%></title> 
+    <title><%= product.productName%></title> 
     <link
       rel="icon"
       href="/images/logo.svg"
@@ -59,23 +59,39 @@
       </div>
 
       <div class="bg-white p-6 rounded-lg shadow-md">
-        <h1 class="text-3xl font-bold mb-4"><%= product.name %></h1>
-        <div class="flex justify-between items-center bm-6">
-          <span class="text-xl text-gray-800 font-semibold">$<%= product.price %></span>
+        <h1 class="text-3xl font-bold mb-4"><%= product.productName %></h1>
+        <div class="flex justify-betwween items-left mb-6">
+          <span class="text-2xl text-gray-800 font-bold"><%= product.brand %></span>
         </div>
-        <p class="text-gray-700 text-sm mb-6">
-          <%= product.description %>
+        <div class="flex justify-between items-center bm-6">
+          <span class="text-lg text-gray-700 font-semibold">$<%= product.price %></span>
+        </div>
+        <p class="text-gray-700 text-base mb-6">
+          <%= product.productDescription %>
         </p>
         <div class="mb-6">
           <h2 class="font-semibold mb-2">Size</h2>
           <div class="grid grid-cols-4 gap-2">
-            <% product.sizes.forEach(function(size) { %>
-            <button
-              class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200"
-            >
-              <%= size %>
-            </button>
-            <% }) %>
+          <button 
+          class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200 focus:bg-gray-800 focus:text-white transition"
+          >
+          S
+          </button>
+          <button
+          class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200 focus:bg-gray-800 focus:text-white transition"
+          >
+          M
+          </button>
+          <button
+          class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200 focus:bg-gray-800 focus:text-white transition"
+          >
+          L
+          </button>
+          <button
+          class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200 focus:bg-gray-800 focus:text-white transition"
+          >
+          XL
+          </button>
           </div>
         </div>
 
@@ -89,21 +105,25 @@
     </div>
 
     <!-- Related Products Section -->
-     <section class="mt-10">
-      <h2 class="text-2xl font-bold mb-6"> Related Products</h2>
-      <div class="flex space-x-4 overflow-x-scroll">
-        <% relatedProducts.forEach(function(related) {%>
-        <div class='min-w[15opx] flex-shrink-0'>
-          <img
-          src="<%= related.image %>"
-          alt="<%= related.name %>"
-          class="rounded-lg mb-2"
-          />
-          <h3 class="text-sm font-semibold"><%= related.name %></h3>
-          <p class="text-xs text-gray-600"><%= related.brand %></p>
-          <p class="text-sm font-bold">$<%= related.price %></p>
-        </div>
-      <% }) %>
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold mb-6">Related Products</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <% relatedProducts.forEach(function(related) { %>
+        <a href="/products/<%= related.id %>" class="block">
+          <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <img
+              src="<%= related.image %>"
+              alt="<%= related.name %>"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-gray-800"><%= related.name %></h3>
+              <p class="text-sm text-gray-600"><%= related.brand %></p>
+              <p class="text-lg font-bold text-gray-900">$<%= related.price %></p>
+            </div>
+          </div>
+        </a>
+        <% }) %>
       </div>
       
      </section>
