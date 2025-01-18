@@ -15,6 +15,7 @@ var adminLogInRouter = require('./routes/admin/log-in');
 var adminRouter = require('./routes/admin/admin');
 var adminEditRouter = require('./routes/admin/admin-edit');
 var teamRoutes = require('./routes/team');
+var aboutRouter = require('./routes/about');
 
 
 var app = express();
@@ -67,6 +68,7 @@ app.use('/admin', adminLogInRouter);
 app.use('/admin', adminRouter);
 app.use('/admin-edit', adminEditRouter);
 app.use('/team', teamRoutes);
+app.use('/about', aboutRouter);
 
 
 
