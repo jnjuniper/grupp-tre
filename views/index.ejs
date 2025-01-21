@@ -26,6 +26,8 @@
   </head>
   <body>
     <header><%- include('partials/header') %></header>
+
+    <!-- Hero-sektion -->
     <section>
       <div class="relative bg-black h-[90vh] flex flex-col sm:flex-row">
         <img
@@ -46,6 +48,7 @@
       </div>
     </section>
 
+    <!-- Nyheter (produkt-grid) -->
     <section id="product-grid-section" class="py-10">
       <div class="container mx-auto px-4">
         <h2 class="text-center text-3xl font-bold mb-6">Nyheter</h2>
@@ -55,6 +58,122 @@
         ></div>
       </div>
     </section>
+
+    <section class="py-6">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Bags -->
+          <a
+            href="/kategori/bags"
+            class="relative block w-full h-64 overflow-hidden group rounded shadow-sm transform transition hover:shadow-xl hover:-translate-y-1"
+          >
+            <img
+              src="https://wallpapers.com/images/hd/kelly-handbag-by-hermes-cnl1f2k1kj0m6m4q.jpg"
+              alt="bags"
+              class="w-full h-full object-cover transition group-hover:scale-105 duration-300"
+            />
+            <h3
+              class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold bg-black/30 group-hover:bg-black/60 transition duration-300"
+            >
+              Bags
+            </h3>
+          </a>
+
+          <!-- Watches -->
+          <a
+            href="/kategori/watches"
+            class="relative block w-full h-64 overflow-hidden group rounded shadow-sm transform transition hover:shadow-xl hover:-translate-y-1"
+          >
+            <img
+              src="https://wallpapers.com/images/featured/rolex-bilder-64sb459b21tamot8.jpg"
+              alt="watches"
+              class="w-full h-full object-cover transition group-hover:scale-105 duration-300"
+            />
+            <h3
+              class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold bg-black/30 group-hover:bg-black/60 transition duration-300"
+            >
+              Watches
+            </h3>
+          </a>
+
+          <!-- Parfume -->
+          <a
+            href="/kategori/perfume"
+            class="relative block w-full h-64 overflow-hidden group rounded shadow-sm transform transition hover:shadow-xl hover:-translate-y-1"
+          >
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/cTN6sVPWMEn9noVN9xzRZB.jpg"
+              alt="perfume"
+              class="w-full h-full object-cover transition group-hover:scale-105 duration-300"
+            />
+            <h3
+              class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold bg-black/30 group-hover:bg-black/60 transition duration-300"
+            >
+              Perfume
+            </h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Om oss / Hitta hit -->
+    <section class="py-6">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- About us -->
+          <a
+            href="/about"
+            class="relative block w-full h-56 overflow-hidden group rounded shadow-sm transform transition hover:shadow-xl hover:-translate-y-1"
+          >
+            <img
+              src="https://png.pngtree.com/background/20230516/original/pngtree-stock-image-of-a-clothing-rack-picture-image_2601916.jpg"
+              alt="Om oss"
+              class="w-full h-full object-cover transition group-hover:scale-105 duration-300"
+            />
+            <h3
+              class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold bg-black/30 group-hover:bg-black/60 transition duration-300"
+            >
+              About us
+            </h3>
+          </a>
+
+          <!-- Hitta hit -->
+          <a
+            href="https://www.google.com/maps/place/Din+Adress"
+            target="_blank"
+            class="relative block w-full h-56 overflow-hidden group rounded shadow-sm transform transition hover:shadow-xl hover:-translate-y-1"
+          >
+            <img
+              src="https://png.pngtree.com/background/20221109/original/pngtree-city-map-gps-navigation-with-location-pin-markers-picture-image_1953527.jpg"
+              alt="Hitta Hit"
+              class="w-full h-full object-cover transition group-hover:scale-105 duration-300"
+            />
+            <h3
+              class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold bg-black/30 group-hover:bg-black/60 transition duration-300"
+            >
+              Find us
+            </h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+          Our Story
+        </h2>
+        <p class="max-w-3xl mx-auto text-lg leading-relaxed text-gray-700">
+          Established with a passion for timeless style, we are committed to
+          offering high-quality products that elevate your everyday look. From
+          classic designs to contemporary trends, our collections are carefully
+          curated so that every piece feels uniquely yours. Experience
+          exceptional craftsmanship, personalized service, and a warm welcome
+          every time you visit our store.
+        </p>
+      </div>
+    </section>
+
+    <footer><%- include('partials/footer') %></footer>
   </body>
-  <footer><%- include('partials/footer') %></footer>
 </html>
