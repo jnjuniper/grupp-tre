@@ -37,6 +37,7 @@ router.get('/products/:id', (req, res) => {
     res.render('product-details', {
       product,
       relatedProducts,
+      isSizeVisible: !(product.category === 'watches'|| product.category === 'bags' || product.category === 'perfume'),
     });
   } catch (error) {
     console.error('Error fetching product by ID:', error.message);

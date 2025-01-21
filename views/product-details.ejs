@@ -69,31 +69,21 @@
         <p class="text-gray-700 text-base mb-6">
           <%= product.productDescription %>
         </p>
-        <div class="mb-6">
-          <h2 class="font-semibold mb-2">Size</h2>
-          <div class="grid grid-cols-4 gap-2">
-          <button 
-          class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200 focus:bg-gray-800 focus:text-white transition"
-          >
-          S
-          </button>
-          <button
-          class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200 focus:bg-gray-800 focus:text-white transition"
-          >
-          M
-          </button>
-          <button
-          class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200 focus:bg-gray-800 focus:text-white transition"
-          >
-          L
-          </button>
-          <button
-          class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200 focus:bg-gray-800 focus:text-white transition"
-          >
-          XL
-          </button>
+        <% if (isSizeVisible) { %>
+          <div class="mb-6">
+            <h2 class="font-semibold mb-2">Size</h2>
+            <div class="grid grid-cols-4 gap-2">
+              <% ['S', 'M', 'L', 'XL'].forEach(function(size) { %>
+                <button
+                  class="border border-gray-300 px-4 py-2 text-center rounded-md hover:bg-gray-200 focus:bg-gray-800 focus:text-white transition"
+                >
+                  <%= size %>
+                </button>
+              <% }); %>
+            </div>
           </div>
-        </div>
+        <% } %>
+        
 
         <!-- Add to Cart Button -->
         <button
