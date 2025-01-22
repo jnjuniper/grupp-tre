@@ -72,7 +72,7 @@ app.use('/admin-edit', adminEditRouter);
 app.use('/admin-add', adminAddRouter);
 app.use('/team', teamRoutes);
 app.use('/about', aboutRouter);
-app.use('/kategori', categoryRouter);
+app.use('/category', categoryRouter);
 
 
 
