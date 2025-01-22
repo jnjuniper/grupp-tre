@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header><%- include("partials/header") %></header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pt-24 flex-grow">
+      <h1 class="text-3xl font-bold mb-6">
+        <%= slug.charAt(0).toUpperCase() + slug.slice(1) %>
+      </h1>
+
+      <!-- Grid med produkter -->
+      <% if (products.length > 0) { %>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <% products.forEach(product => { %>
+        <a
+          href="/kategori/details/<%= product.id %>"
+          class="block bg-white shadow rounded-lg overflow-hidden transform transition-all duration-300 hover:shadow-lg hover:scale-105"
+        >
+          <div class="w-full h-48 relative group">
+            <img
+              src="<%= product.image %>"
+              alt="<%= product.name %>"
+              class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
+            />
+
+            <% if (product.secondaryImage1) { %>
+            <img
+              src="<%= product.secondaryImage1 %>"
+              alt="<%= product.name %>"
+              class="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            />
+            <% } else { %>
+            <img
+              src="<%= product.image %>"
+              alt="<%= product.name %>"
+              class="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            />
+            <% } %>
+          </div>
+
+          <div class="p-4 text-center">
+            <h3 class="text-lg font-medium break-words"><%= product.name %></h3>
+            <p class="text-sm text-gray-500 break-words">
+              <%= product.category %>
+            </p>
+            <p class="text-sm font-semibold"><%= product.price %> SEK</p>
+          </div>
+        </a>
+        <% }) %>
+      </div>
+      <% } else { %>
+
+      <p class="col-span-4 text-center text-gray-500 pt-16">
+        Inga produkter i denna kategori.
+      </p>
+      <% } %>
+    </main>
+
+    <!-- Footer -->
+    <footer><%- include("partials/footer") %></footer>
+  </body>
+</html>
