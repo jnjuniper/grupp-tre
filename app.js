@@ -18,7 +18,7 @@ var adminAddRouter = require('./routes/admin/admin-add');
 var teamRoutes = require('./routes/team');
 var aboutRouter = require('./routes/about');
 var categoryRouter = require('./routes/category'); 
-
+var shopRouter = require ('./routes/shop');
 
 var app = express();
 
@@ -73,7 +73,7 @@ app.use('/admin-add', adminAddRouter);
 app.use('/team', teamRoutes);
 app.use('/about', aboutRouter);
 app.use('/category', categoryRouter);
-
+app.use('/shop',shopRouter);
 
 
 // catch 404 and forward to error handler
