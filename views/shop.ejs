@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link
+      rel="icon"
+      href="/images/logo.svg"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      href="/images/logo-white.svg"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col bg-gray-100">
+    <header><%- include('partials/header') %></header>
+
+    <section class="py-10 flex-grow">
+      <div class="container mx-auto px-4" style ="padding-top: 3rem;">
+        <h1 class="text-center text-3xl font-bold mb-6">All Products</h1>
+        <div
+          class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          <% products.forEach(product => { %>
+          <div
+            class="p-4 flex flex-col items-center justify-between bg-white rounded-lg shadow-lg hover:shadow-xl transition-all"
+          >
+            <a href="/products/<%= product.id %>" class="relative group">
+              <img
+                src="<%= product.image %>"
+                alt="<%= product.productName %>"
+                class="w-full h-48 object-cover rounded-t-lg group-hover:hidden"
+              />
+              <img
+                src="<%= product.secondaryImage1 %>"
+                alt="<%= product.productName %> alternate view"
+                class="w-full h-48 object-cover rounded-t-lg hidden group-hover:block"
+              />
+            </a>
+            <div class="p-4 flex flex-col items-start">
+              <a href="/products/<%= product.slug %>">
+                <h3 class="text-lg font-bold text-gray-800"><%= product.productName %></h3>
+              </a>
+              <p class="text-sm text-gray-600"><%= product.brand %></p>
+              <p class="text-lg font-semibold text-gray-900"><%= product.price %> kr</p>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white text-center"><%- include('partials/footer') %></footer>
+  </body>
+</html>
