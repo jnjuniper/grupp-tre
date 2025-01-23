@@ -13,7 +13,7 @@ router.get("/details/:id", (req, res) => {
   const product = productStmt.get(productId);
 
   if (!product) {
-    return res.status(404).send("Produkten kunde inte hittas.");
+    return res.status(404).send("Could not find products.");
   }
 
   const isSizeVisible = !!product.size;
@@ -24,7 +24,6 @@ router.get("/details/:id", (req, res) => {
       SELECT * FROM products
       WHERE category = ?
         AND id != ?
-      LIMIT 4
     `);
     relatedProducts = relatedStmt.all(product.category, product.id);
   }
@@ -33,7 +32,7 @@ router.get("/details/:id", (req, res) => {
     title: product.productName,
     product: product,
     isSizeVisible: isSizeVisible,
-    relatedProducts: relatedProducts, // Array för “Relaterade produkter”
+    relatedProducts: relatedProducts,
   });
 });
 
