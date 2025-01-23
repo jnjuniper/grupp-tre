@@ -9,10 +9,10 @@
   <body class="font-sans">
     <header><%- include('../partials/header') %></header>
 
-    <main class="mt-28 p-6">
+    <main class="mt-28 p-1 md:p-6 md:mx-6 lg:mx-16">
       <section class="w-full">
         <button
-          class="accordion-button flex justify-between items-center w-full bg-white text-black text-lg px-6 py-4 border border-blue-200 rounded-t-md hover:bg-black hover:text-white transition"
+          class="accordion-button flex justify-between items-center w-full bg-white text-black text-lg px-6 py-4 border border-blue-200 rounded-t-md hover:bg-blue-200 transition"
         >
           <strong>Products Administration</strong>
           <span class="accordion-icon text-blue-500">▼</span>
@@ -125,21 +125,55 @@
         </div>
 
         <button
-          class="accordion-button flex justify-between items-center w-full bg-white text-black text-lg px-6 py-4 border border-blue-200 hover:bg-black hover:text-white transition"
+        class="accordion-button flex justify-between items-center w-full bg-white text-black text-lg px-6 py-4 border border-blue-200 rounded-t-md hover:bg-blue-200 transition"
         >
-          <strong>Header Pictures</strong>
+          <strong>Hero Pictures</strong>
           <span class="accordion-icon text-blue-500">▼</span>
         </button>
         <div
           class="hidden panel bg-gray-50 px-6 py-4 border border-t-0 border-blue-200"
         >
-          <ul>
-            <li>...</li>
-          </ul>
+          <form
+            action="/admin/update-hero-images"
+            method="POST"
+            enctype="multipart/form-data"
+            class="grid md:grid-cols-3"
+          >
+            <div class="col-span-1 mr-4 mt-2 flex flex-col">
+              <label for="heroImage1" class="font-bold text-lg mb-2"
+                >Hero Image left:</label
+              >
+              <input
+                type="file"
+                name="heroImages"
+                id="heroImage1"
+                class="text-lg"
+              />
+            </div>
+            <div class="col-span-1 mr-4 mt-2 flex flex-col">
+              <label for="heroImage2" class="font-bold text-lg mb-2"
+                >Hero Image right:</label
+              >
+              <input
+                type="file"
+                name="heroImages"
+                id="heroImage2"
+                class="text-lg"
+              />
+            </div>
+            <div class="col-span-1 mt-4 mb-2">
+              <button
+                type="submit"
+                class="p-3 font-medium border border-blue-500 bg-white text-blue-500 hover:bg-blue-500 hover:text-white transition-all text-center rounded"
+              >
+                Update Hero Images
+              </button>
+            </div>
+          </form>
         </div>
 
         <button
-          class="accordion-button flex justify-between items-center w-full bg-white text-black text-lg px-6 py-4 border border-blue-200 rounded-b-md hover:bg-black hover:text-white transition"
+        class="accordion-button flex justify-between items-center w-full bg-white text-black text-lg px-6 py-4 border border-blue-200 rounded-t-md hover:bg-blue-200 transition"
         >
           <strong>Admin user</strong>
           <span class="accordion-icon text-blue-500">▼</span>

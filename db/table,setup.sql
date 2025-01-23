@@ -11,3 +11,10 @@ CREATE TABLE products (
     isNew TEXT,
     category TEXT
 );
+
+
+
+CREATE TABLE IF NOT EXISTS hero_images (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    image_path TEXT NOT NULL
+);
