@@ -38,5 +38,6 @@ npm i better-sqlite3
 npm install express-session
 npm install connect-sqlite3
 npm install bcrypt
+npm install multer
 
 ```
