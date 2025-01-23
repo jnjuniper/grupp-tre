@@ -20,7 +20,6 @@ let isSidebarOpen = false;
 let isCartSidebarOpen = false;
 
 const updateHeaderStyles = () => {
-  // Kontrollera om sidan är startsidan eller "about"
   const isHomeOrAboutPage =
     window.location.pathname === "/" || window.location.pathname === "/about";
 
@@ -52,7 +51,6 @@ const updateHeaderStyles = () => {
       cartImgDesktop.src = "/images/cart-white.svg";
     }
   } else {
-    // För andra sidor: Vit bakgrund och svarta symboler
     header.classList.remove("bg-transparent", "text-white");
     header.classList.add("bg-white", "text-black");
 
@@ -66,10 +64,8 @@ const updateHeaderStyles = () => {
   }
 };
 
-// Kör funktionen vid sidladdning
 updateHeaderStyles();
 
-// Behåll stilen för startsida och "about" under scroll
 window.addEventListener("scroll", () => {
   updateHeaderStyles();
 });

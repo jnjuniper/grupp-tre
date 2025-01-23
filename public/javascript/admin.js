@@ -1,7 +1,6 @@
 // Accordion
 document.querySelectorAll(".accordion-button").forEach((button) => {
     button.addEventListener("click", () => {
-      // Close all other accordions
       document.querySelectorAll(".accordion-button").forEach((btn) => {
         if (btn !== button) {
           btn.classList.remove("active");
@@ -13,7 +12,6 @@ document.querySelectorAll(".accordion-button").forEach((button) => {
         }
       });
   
-      // Toggle current accordion
       button.classList.toggle("active");
       const panel = button.nextElementSibling;
       if (panel) {

@@ -2,21 +2,19 @@ const express = require("express");
 const Database = require("better-sqlite3");
 const router = express.Router();
 
-// Anslut till SQLite-databasen
 const db = new Database("./db/products.db", { verbose: console.log });
 
-// Route för att hantera sökningen
 router.get("/search", (req, res) => {
   const searchQuery = req.query.q;
-  const sort = req.query.sort || "newest"; // Standard: sortera nyast först
+  const sort = req.query.sort || "newest"; 
 
   if (!searchQuery || searchQuery.trim() === "") {
     return res.render("search-page", {
-      title: "Sökresultat",
+      title: "Search",
       query: "",
       results: [],
       sort,
-      message: "Ange ett sökord för att hitta produkter."
+      message: "Enter a keyword to find products."
     });
   }
 
@@ -27,7 +25,6 @@ router.get("/search", (req, res) => {
       WHERE productName LIKE ?
     `;
 
-    // Lägg till sorteringsordning
     if (sort === "newest") {
       sql += " ORDER BY id DESC";
     } else if (sort === "oldest") {
@@ -41,7 +38,7 @@ router.get("/search", (req, res) => {
     const results = db.prepare(sql).all(`%${searchQuery}%`);
 
     res.render("search-page", {
-      title: "Sökresultat",
+      title: "Search",
       query: searchQuery,
       results,
       sort,
@@ -50,7 +47,7 @@ router.get("/search", (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).render("search-page", {
-      title: "Sökresultat",
+      title: "Search",
       query: searchQuery,
       results: [],
       sort,

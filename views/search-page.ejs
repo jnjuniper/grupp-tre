@@ -19,19 +19,19 @@
       <% if (results.length > 0) { %>
         <div class="flex items-center justify-between mb-4">
           <h1 class="text-xl font-semibold">
-            Hittade <%= results.length %> produkt<%= results.length > 1 ? 'er' : '' %>
+            Finded <%= results.length %> product<%= results.length > 1 ? 's' : '' %>
           </h1>
           <!-- Dropdown för sortering -->
           <div>
-            <label for="sortDropdown" class="text-sm font-medium text-gray-700 mr-2">Sortera efter:</label>
+            <label for="sortDropdown" class="text-sm font-medium text-gray-700 mr-2">Sort by:</label>
             <select
               id="sortDropdown"
               class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
             >
-              <option value="newest" <%= sort === 'newest' ? 'selected' : '' %>>Nyast först</option>
-              <option value="oldest" <%= sort === 'oldest' ? 'selected' : '' %>>Äldst först</option>
-              <option value="highest" <%= sort === 'highest' ? 'selected' : '' %>>Högst pris</option>
-              <option value="lowest" <%= sort === 'lowest' ? 'selected' : '' %>>Lägst pris</option>
+              <option value="newest" <%= sort === 'newest' ? 'selected' : '' %>>New</option>
+              <option value="oldest" <%= sort === 'oldest' ? 'selected' : '' %>>Old</option>
+              <option value="highest" <%= sort === 'highest' ? 'selected' : '' %>>High</option>
+              <option value="lowest" <%= sort === 'lowest' ? 'selected' : '' %>>Low</option>
             </select>
           </div>
         </div>
@@ -72,7 +72,7 @@
                 </p>
                 <!-- Produktpris -->
                 <p class="text-sm font-semibold">
-                  <%= product.price %> SEK
+                  <%= product.price %> $
                 </p>
               </div>
             </a>
@@ -82,7 +82,7 @@
       <% } else { %>
         <!-- No Products Message -->
         <p class="text-center text-gray-500 pt-16">
-          Inga produkter matchade din sökning.
+          No products matched your search.
         </p>
       <% } %>
     </main>
