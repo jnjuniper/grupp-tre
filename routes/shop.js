@@ -6,7 +6,7 @@ const db = new Database('./db/products.db'); // Adjust the path to your database
 
 router.get('/', (req, res) => {
     try {
-      const products = db.prepare('SELECT * FROM products LIMIT 8').all(); // Fetch 8 products
+      const products = db.prepare('SELECT * FROM products').all(); // Fetch 8 products
       res.render('shop', {
         title: 'Shop',
         products,
