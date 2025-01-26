@@ -168,6 +168,10 @@
             </div>
             <% } %>
           <button
+          id="add-to-cart"
+          data-product-id="'<%= product.id %>'"
+          data-name="'<%= product.productName %>'"
+          data-price="'<%= product.price %>'"
           class="w-full bg-black text-white py-3 rounded-md text-lg hover:bg-gray-800"
         >
           Add to Cart
@@ -205,7 +209,39 @@
         </div>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-
+      <script>
+        document.getElementById('add-to-cart').addEventListener('click', async (event) => {
+          const button = event.target;
+      
+          // Get product details from data attributes
+          const productId = button.getAttribute('data-product-id');
+          const name = button.getAttribute('data-name');
+          const price = button.getAttribute('data-price');
+      
+          try {
+            // Send a POST request to the backend
+            const response = await fetch('/api/cart', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ productId, name, price }),
+            });
+      
+            const data = await response.json();
+      
+            if (data.success) {
+              alert('Product added to cart!');
+            } else {
+              alert('Failed to add product to cart.');
+            }
+          } catch (error) {
+            console.error('Error adding to cart:', error);
+            alert('An error occurred. Please try again.');
+          }
+        });
+      </script>
+      
   </body>
   <footer><%- include('partials/footer') %></footer>
 </html>
