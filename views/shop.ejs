@@ -67,12 +67,12 @@
                   class="w-full h-48 object-cover rounded-t-lg hidden group-hover:block"
                 />
               </a>
-              <div class="p-4 flex flex-col items-start">
+              <div class="p-4 flex flex-col items-center">
                 <a href="/products/<%= product.slug %>">
                   <h3 class="text-lg font-bold text-gray-800"><%= product.productName %></h3>
                 </a>
                 <p class="text-sm text-gray-600"><%= product.brand %></p>
-                <p class="text-lg font-semibold text-gray-900"><%= product.price %> kr</p>
+                <p class="text-lg font-semibold text-gray-900"><%= product.price %> $</p>
               </div>
             </div>
           <% }); %>
