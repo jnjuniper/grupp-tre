@@ -5,64 +5,52 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
-    <!-- Header -->
+    
     <header><%- include("partials/header") %></header>
 
-    <!-- Main Content -->
+    
     <main class="container mx-auto px-4 pt-24 flex-grow">
       <h1 class="text-3xl font-bold mb-6">
         <%= slug.charAt(0).toUpperCase() + slug.slice(1) %>
       </h1>
 
-      <!-- Grid med produkter -->
+    
       <% if (products.length > 0) { %>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         <% products.forEach(product => { %>
-        <a
-          href="/category/details/<%= product.id %>"
-          class="block bg-white shadow rounded-lg overflow-hidden transform transition-all duration-300 hover:shadow-lg hover:scale-105"
-        >
-          <div class="w-full h-48 relative group">
+        <div
+          class="p-4 flex flex-col items-center justify-between bg-white rounded-lg shadow-lg hover:shadow-xl transition-all">
+          <a href="/products/<%= product.id %>" class="relative group">
             <img
               src="<%= product.image %>"
-              alt="<%= product.name %>"
-              class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
-            />
-
+              alt="<%= product.productName %>"
+              class="w-full h-48 object-cover rounded-t-lg">
+      
             <% if (product.secondaryImage1) { %>
             <img
               src="<%= product.secondaryImage1 %>"
-              alt="<%= product.name %>"
-              class="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            />
-            <% } else { %>
-            <img
-              src="<%= product.image %>"
-              alt="<%= product.name %>"
-              class="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            />
-            <% } %>
-          </div>
+              alt="<%= product.productName %> alternate view"
+              class="w-full h-48 object-cover rounded-t-lg hidden">
 
-          <div class="p-4 text-center">
-            <h3 class="text-lg font-medium break-words"><%= product.name %></h3>
-            <p class="text-sm text-gray-500 break-words">
-              <%= product.category %>
-            </p>
-            <p class="text-sm font-semibold"><%= product.price %> $</p>
+            <% } %>
+          </a>
+          <div class="p-4 flex flex-col items-center">
+            <a href="/products/<%= product.slug %>">
+              <h3 class="text-lg font-bold text-gray-800"><%= product.productName %></h3>
+            </a>
+            <p class="text-sm text-gray-600"><%= product.brand %></p>
+            <p class="text-lg font-semibold text-gray-900"><%= product.price %> kr</p>
           </div>
-        </a>
+        </div>
         <% }) %>
       </div>
       <% } else { %>
-
       <p class="col-span-4 text-center text-gray-500 pt-16">
-        There is no products for this category.
+        There are no products for this category.
       </p>
       <% } %>
     </main>
 
-    <!-- Footer -->
     <footer><%- include("partials/footer") %></footer>
   </body>
 </html>
