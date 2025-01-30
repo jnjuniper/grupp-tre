@@ -8,13 +8,25 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       return response.json();
     })
+    // Random 4 produkter visas
     .then((products) => {
-      products
-        .filter((product) => product.isNew === true)
-        .forEach((product) => {
-          const productCard = createProductCard(product);
-          productGrid.appendChild(productCard);
-        });
+      const filteredProducts = products.filter((product) => product.isNew === true);
+
+      let productsToDisplay;
+      if (filteredProducts.length > 4) {
+        for (let i = filteredProducts.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [filteredProducts[i], filteredProducts[j]] = [filteredProducts[j], filteredProducts[i]];
+        }
+        productsToDisplay = filteredProducts.slice(0, 4);
+      } else {
+        productsToDisplay = filteredProducts;
+      }
+
+      productsToDisplay.forEach((product) => {
+        const productCard = createProductCard(product);
+        productGrid.appendChild(productCard);
+      });
     })
     .catch((error) => {
       console.error(error.message);
