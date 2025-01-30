@@ -72,7 +72,6 @@ window.addEventListener("scroll", () => {
   updateHeaderStyles();
 });
 
-// Reset Hamburger Icon
 const resetHamburgerIcon = () => {
   hamburgerIconTop.style.transform = "rotate(0)";
   hamburgerIconMiddle.style.opacity = "1";
@@ -81,7 +80,6 @@ const resetHamburgerIcon = () => {
   hamburgerIconBottom.style.backgroundColor = "currentColor";
 };
 
-// Toggle Sidebar
 hamburger.addEventListener("click", () => {
   isSidebarOpen = !isSidebarOpen;
 
@@ -102,7 +100,6 @@ hamburger.addEventListener("click", () => {
   updateHeaderStyles();
 });
 
-// Close Sidebar on Outside Click
 window.addEventListener("click", (e) => {
   if (
     isSidebarOpen &&
@@ -116,7 +113,6 @@ window.addEventListener("click", (e) => {
   }
 });
 
-// Toggle Cart Sidebar
 function toggleCartSidebar(open = null) {
   if (open !== null) {
     isCartSidebarOpen = open;
@@ -131,7 +127,6 @@ function toggleCartSidebar(open = null) {
   updateHeaderStyles();
 }
 
-// Open Cart Sidebar
 cartImg.addEventListener("click", (e) => {
   e.preventDefault();
   toggleCartSidebar(true);
@@ -144,12 +139,10 @@ cartImgDesktop.addEventListener("click", (e) => {
   loadCart();
 });
 
-// Close Cart Sidebar
 closeCartSidebarButton.addEventListener("click", () => {
   toggleCartSidebar(false);
 });
 
-// Load Cart Items
 async function loadCart() {
   try {
     const response = await fetch("/api/cart");
@@ -172,7 +165,9 @@ async function loadCart() {
                 class="h-16 w-16 object-cover rounded-md"
               />
               <div>
-                <h3 class="font-semibold text-gray-800">${item.name || "No Name"}</h3>
+                <h3 class="font-semibold text-gray-800">${
+                  item.name || "No Name"
+                }</h3>
                 <p class="text-sm text-gray-500">$${item.price.toFixed(2)}</p>
                 <p class="text-sm text-gray-500">Quantity: ${item.quantity}</p>
               </div>
@@ -204,12 +199,8 @@ async function loadCart() {
   }
 }
 
-// Remove Item from Cart
 document.addEventListener("click", async (event) => {
-  if (
-    event.target &&
-    event.target.classList.contains("remove-from-cart")
-  ) {
+  if (event.target && event.target.classList.contains("remove-from-cart")) {
     const productId = event.target.getAttribute("data-product-id");
     try {
       const response = await fetch(`/api/cart/${productId}`, {
@@ -227,7 +218,6 @@ document.addEventListener("click", async (event) => {
   }
 });
 
-// Login/logout functionality
 const loginPopup = document.getElementById("login-popup");
 const loginForm = document.getElementById("login-form");
 const closeLoginPopupButton = document.getElementById("close-login-popup");

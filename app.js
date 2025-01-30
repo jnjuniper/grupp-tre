@@ -41,7 +41,7 @@ app.use(
     secret: 'yourSecretKey',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 3600000 }, // 1 hour
+    cookie: { maxAge: 3600000 }, 
   })
 );
 

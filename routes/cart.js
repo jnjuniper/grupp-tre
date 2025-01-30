@@ -3,7 +3,7 @@ const router = express.Router();
 const Database = require("better-sqlite3");
 const db = new Database("./db/products.db");
 
-// Lägg till produkt i kundvagnen
+
 router.post("/cart", (req, res) => {
   const { productId, name, price } = req.body;
 
@@ -13,7 +13,7 @@ router.post("/cart", (req, res) => {
     const Database = require("better-sqlite3");
     const db = new Database("./db/products.db");
     
-    // Lägg till produkt i kundvagnen
+
     router.post("/cart", (req, res) => {
       const { productId, name, price } = req.body;
     
@@ -31,7 +31,7 @@ router.post("/cart", (req, res) => {
         req.session.cart.push({
           productId,
           name,
-          price: parseFloat(price), // Se till att priset är ett nummer
+          price: parseFloat(price), 
           quantity: 1,
         });
       }
@@ -39,32 +39,32 @@ router.post("/cart", (req, res) => {
       res.json({ success: true, cart: req.session.cart });
     });
     
-    // Hämta kundvagnen
+   
     router.get("/cart", (req, res) => {
       const cart = req.session.cart || [];
       let total = 0;
     
-      // Hämta produktdata från databasen och berika kundvagnen
+    
       const enrichedCart = cart.map((item) => {
         const product = db
           .prepare("SELECT * FROM products WHERE id = ?")
-          .get(parseInt(item.productId, 10)); // Se till att ID är ett nummer
+          .get(parseInt(item.productId, 10)); 
     
         if (product) {
-          const price = parseFloat(product.price) || 0; // Använd pris från databasen
+          const price = parseFloat(product.price) || 0; 
           total += price * item.quantity;
     
           return {
             ...item,
-            price, // Pris från databasen
-            image: product.image || "/images/placeholder.png", // Bild från databasen
+            price, 
+            image: product.image || "/images/placeholder.png", 
           };
         } else {
           console.error(`Produkt med ID ${item.productId} hittades inte.`);
           return {
             ...item,
             price: 0,
-            image: "/images/placeholder.png", // Fallback för bild
+            image: "/images/placeholder.png", 
           };
         }
       });
@@ -72,7 +72,7 @@ router.post("/cart", (req, res) => {
       res.json({ cart: enrichedCart, total: total.toFixed(2) });
     });
     
-    // Ta bort produkt från kundvagnen
+ 
     router.delete("/cart/:productId", (req, res) => {
       const { productId } = req.params;
     
@@ -101,7 +101,7 @@ router.post("/cart", (req, res) => {
     req.session.cart.push({
       productId,
       name,
-      price: parseFloat(price), // Se till att priset är ett nummer
+      price: parseFloat(price), 
       quantity: 1,
     });
   }
@@ -109,32 +109,32 @@ router.post("/cart", (req, res) => {
   res.json({ success: true, cart: req.session.cart });
 });
 
-// Hämta kundvagnen
+
 router.get("/cart", (req, res) => {
   const cart = req.session.cart || [];
   let total = 0;
 
   const enrichedCart = cart.map((item) => {
-    const sanitizedProductId = item.productId.replace(/'/g, ""); // Sanera input
+    const sanitizedProductId = item.productId.replace(/'/g, ""); 
     const product = db
       .prepare("SELECT * FROM products WHERE id = ?")
       .get(sanitizedProductId);
 
     if (product) {
-      const price = parseFloat(product.price) || 0; // Använd priset från databasen
+      const price = parseFloat(product.price) || 0; 
       total += price * item.quantity;
 
       return {
         ...item,
         price,
-        image: product.image || "/images/placeholder.png", // Bild med fallback
+        image: product.image || "/images/placeholder.png", 
       };
     } else {
       console.error(`Produkt med ID ${sanitizedProductId} hittades inte i databasen.`);
       return {
         ...item,
         price: 0,
-        image: "/images/placeholder.png", // Bild med fallback
+        image: "/images/placeholder.png", 
       };
     }
   });
@@ -142,7 +142,7 @@ router.get("/cart", (req, res) => {
   res.json({ cart: enrichedCart, total: total.toFixed(2) });
 });
 
-// Ta bort produkt från kundvagnen
+
 router.delete("/cart/:productId", (req, res) => {
   const { productId } = req.params;
 
