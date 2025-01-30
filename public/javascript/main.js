@@ -18,6 +18,11 @@ const closeCartSidebarButton = document.getElementById("close-cart-sidebar");
 const cartContent = document.getElementById("cart-content");
 const cartTotal = document.getElementById("cart-total");
 
+const contactForm = document.getElementById("contactForm");
+const popUp = document.getElementById("popUp");
+const closeButton = document.getElementById("closeButton");
+const pageContent = document.getElementById("pageContent");
+
 let isSidebarOpen = false;
 let isCartSidebarOpen = false;
 
@@ -295,3 +300,25 @@ if (loginForm) {
       });
   });
 }
+
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (popUp) {
+      popUp.classList.remove("hidden");
+      popUp.classList.add("flex");
+    }
+  });
+}
+
+if (closeButton && popUp) {
+  closeButton.addEventListener("click", () => {
+    popUp.classList.add("hidden");
+    popUp.classList.remove("flex");
+    if (contactForm) {
+      contactForm.reset();
+    }
+  });
+}
+
+updateHeaderStyles();
