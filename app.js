@@ -20,6 +20,7 @@ var aboutRouter = require('./routes/about');
 var categoryRouter = require('./routes/category'); 
 var shopRouter = require ('./routes/shop');
 var cartRouter = require('./routes/cart');
+var checkoutRouter = require('./routes/checkout');
 
 var app = express();
 
@@ -40,7 +41,7 @@ app.use(
     secret: 'yourSecretKey',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 3600000 }, // 1 hour
+    cookie: { maxAge: 3600000 }, 
   })
 );
 
@@ -76,6 +77,7 @@ app.use('/about', aboutRouter);
 app.use('/category', categoryRouter);
 app.use('/shop',shopRouter);
 app.use('/api', cartRouter);
+app.use('/checkout', checkoutRouter);
 
 
 // catch 404 and forward to error handler

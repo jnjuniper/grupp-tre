@@ -15,6 +15,13 @@ const cartImg = document.getElementById("cart-img");
 const cartImgDesktop = document.getElementById("cart-img-desktop");
 const cartSidebar = document.getElementById("cart-sidebar");
 const closeCartSidebarButton = document.getElementById("close-cart-sidebar");
+const cartContent = document.getElementById("cart-content");
+const cartTotal = document.getElementById("cart-total");
+
+const contactForm = document.getElementById("contactForm");
+const popUp = document.getElementById("popUp");
+const closeButton = document.getElementById("closeButton");
+const pageContent = document.getElementById("pageContent");
 
 let isSidebarOpen = false;
 let isCartSidebarOpen = false;
@@ -70,33 +77,6 @@ window.addEventListener("scroll", () => {
   updateHeaderStyles();
 });
 
-header.addEventListener("mouseenter", () => {
-  if (
-    window.location.pathname === "/" ||
-    window.location.pathname === "/about"
-  ) {
-    header.classList.remove("bg-transparent", "text-white");
-    header.classList.add("bg-white", "text-black");
-
-    logoImg.src = "/images/logo.svg";
-    loginImg.src = "/images/login.svg";
-    cartImg.src = "/images/cart.svg";
-
-    logoImgDesktop.src = "/images/logo.svg";
-    loginImgDesktop.src = "/images/login.svg";
-    cartImgDesktop.src = "/images/cart.svg";
-  }
-});
-
-header.addEventListener("mouseleave", () => {
-  if (
-    window.location.pathname === "/" ||
-    window.location.pathname === "/about"
-  ) {
-    updateHeaderStyles();
-  }
-});
-
 const resetHamburgerIcon = () => {
   hamburgerIconTop.style.transform = "rotate(0)";
   hamburgerIconMiddle.style.opacity = "1";
@@ -107,11 +87,10 @@ const resetHamburgerIcon = () => {
 
 hamburger.addEventListener("click", () => {
   isSidebarOpen = !isSidebarOpen;
+
   sidebar.style.transform = isSidebarOpen
     ? "translateX(0)"
     : "translateX(-100%)";
-
-  updateHeaderStyles();
 
   if (isSidebarOpen) {
     hamburgerIconTop.style.transform = "rotate(45deg) translateY(8px)";
@@ -122,25 +101,8 @@ hamburger.addEventListener("click", () => {
   } else {
     resetHamburgerIcon();
   }
-});
-
-function toggleCartSidebar() {
-  isCartSidebarOpen = !isCartSidebarOpen;
-  cartSidebar.style.transform = isCartSidebarOpen
-    ? "translateX(0)"
-    : "translateX(100%)";
 
   updateHeaderStyles();
-}
-
-cartImg.addEventListener("click", (e) => {
-  e.preventDefault();
-  toggleCartSidebar();
-});
-
-cartImgDesktop.addEventListener("click", (e) => {
-  e.preventDefault();
-  toggleCartSidebar();
 });
 
 window.addEventListener("click", (e) => {
@@ -151,31 +113,116 @@ window.addEventListener("click", (e) => {
   ) {
     isSidebarOpen = false;
     sidebar.style.transform = "translateX(-100%)";
-    updateHeaderStyles();
     resetHamburgerIcon();
+    updateHeaderStyles();
+  }
+});
+
+function toggleCartSidebar(open = null) {
+  if (open !== null) {
+    isCartSidebarOpen = open;
+  } else {
+    isCartSidebarOpen = !isCartSidebarOpen;
   }
 
-  if (
-    isCartSidebarOpen &&
-    !cartSidebar.contains(e.target) &&
-    !cartImg.contains(e.target) &&
-    !cartImgDesktop.contains(e.target)
-  ) {
-    isCartSidebarOpen = false;
-    cartSidebar.style.transform = "translateX(100%)";
-    updateHeaderStyles();
-  }
+  cartSidebar.style.transform = isCartSidebarOpen
+    ? "translateX(0)"
+    : "translateX(100%)";
+
+  updateHeaderStyles();
+}
+
+cartImg.addEventListener("click", (e) => {
+  e.preventDefault();
+  toggleCartSidebar(true);
+  loadCart();
+});
+
+cartImgDesktop.addEventListener("click", (e) => {
+  e.preventDefault();
+  toggleCartSidebar(true);
+  loadCart();
 });
 
 closeCartSidebarButton.addEventListener("click", () => {
-  isCartSidebarOpen = false;
-  cartSidebar.style.transform = "translateX(100%)";
-  updateHeaderStyles();
+  toggleCartSidebar(false);
 });
 
+async function loadCart() {
+  try {
+    const response = await fetch("/api/cart");
+    if (!response.ok) throw new Error("Failed to fetch cart data");
 
+    const data = await response.json();
 
-// Login/logout functionality
+    cartContent.innerHTML = "";
+    let total = 0;
+
+    if (data.cart.length > 0) {
+      const itemsHTML = data.cart
+        .map(
+          (item) => `
+          <div class="flex items-center justify-between py-4 border-b">
+            <div class="flex items-center space-x-4">
+              <img
+                src="${item.image || "/images/placeholder.png"}"
+                alt="${item.name || "No Name"}"
+                class="h-16 w-16 object-cover rounded-md"
+              />
+              <div>
+                <h3 class="font-semibold text-gray-800">${
+                  item.name || "No Name"
+                }</h3>
+                <p class="text-sm text-gray-500">$${item.price.toFixed(2)}</p>
+                <p class="text-sm text-gray-500">Quantity: ${item.quantity}</p>
+              </div>
+            </div>
+            <button
+              data-product-id="${item.productId}"
+              class="text-red-600 hover:underline text-sm remove-from-cart"
+            >
+              Remove
+            </button>
+          </div>
+        `
+        )
+        .join("");
+
+      cartContent.innerHTML = itemsHTML;
+      total = data.cart.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+      );
+    } else {
+      cartContent.innerHTML =
+        '<p class="text-gray-500">Your cart is empty.</p>';
+    }
+
+    cartTotal.textContent = `$${total.toFixed(2)}`;
+  } catch (error) {
+    console.error("Error loading cart:", error.message);
+  }
+}
+
+document.addEventListener("click", async (event) => {
+  if (event.target && event.target.classList.contains("remove-from-cart")) {
+    const productId = event.target.getAttribute("data-product-id");
+    try {
+      const response = await fetch(`/api/cart/${productId}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+      if (data.success) {
+        loadCart();
+      } else {
+        alert("Failed to remove product.");
+      }
+    } catch (error) {
+      console.error("Error removing product:", error.message);
+    }
+  }
+});
+
 const loginPopup = document.getElementById("login-popup");
 const loginForm = document.getElementById("login-form");
 const closeLoginPopupButton = document.getElementById("close-login-popup");
@@ -183,31 +230,12 @@ const loginIconMobile = document.getElementById("login-icon-mobile");
 const loginIconDesktop = document.getElementById("login-icon-desktop");
 const logoutButton = document.getElementById("logout-btn");
 
-let isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
-
 const showLoginPopup = () => {
-  if (loginPopup) {
-    loginPopup.classList.remove("hidden");
-  }
+  if (loginPopup) loginPopup.classList.remove("hidden");
 };
 
 const closeLoginPopup = () => {
-  if (loginPopup) {
-    loginPopup.classList.add("hidden"); 
-  }
-};
-
-const updateUI = () => {
-  const adminLink = document.getElementById("admin-link");
-  const adminLinkDesktop = document.getElementById("admin-link-desktop");
-
-  if (isLoggedIn) {
-    adminLink?.classList.remove("hidden");
-    adminLinkDesktop?.classList.remove("hidden");
-  } else {
-    adminLink?.classList.add("hidden");
-    adminLinkDesktop?.classList.add("hidden");
-  }
+  if (loginPopup) loginPopup.classList.add("hidden");
 };
 
 if (loginIconMobile) {
@@ -229,9 +257,7 @@ if (logoutButton) {
     e.preventDefault();
     fetch("/admin/logout", { method: "POST" })
       .then(() => {
-        sessionStorage.removeItem("isLoggedIn");
-        isLoggedIn = false;
-        location.reload(); 
+        location.reload();
       })
       .catch((err) => console.error("Logout error:", err));
   });
@@ -239,14 +265,13 @@ if (logoutButton) {
 
 if (closeLoginPopupButton) {
   closeLoginPopupButton.addEventListener("click", closeLoginPopup);
-}
 
-if (loginPopup) {
-  window.addEventListener("click", (e) => {
-    if (e.target === loginPopup) closeLoginPopup();
-  });
+  if (loginPopup) {
+    window.addEventListener("click", (e) => {
+      if (e.target === loginPopup) closeLoginPopup();
+    });
+  }
 }
-
 
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
@@ -264,8 +289,6 @@ if (loginForm) {
         return res.json();
       })
       .then(() => {
-        sessionStorage.setItem("isLoggedIn", "true");
-        isLoggedIn = true;
         location.reload();
       })
       .catch((err) => {
@@ -278,23 +301,24 @@ if (loginForm) {
   });
 }
 
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (popUp) {
+      popUp.classList.remove("hidden");
+      popUp.classList.add("flex");
+    }
+  });
+}
 
- // Contact form
- const contactForm = document.getElementById("contactForm");
- const popUp = document.getElementById("popUp");
- const closeButton = document.getElementById("closeButton");
- const pageContent = document.getElementById("pageContent");
+if (closeButton && popUp) {
+  closeButton.addEventListener("click", () => {
+    popUp.classList.add("hidden");
+    popUp.classList.remove("flex");
+    if (contactForm) {
+      contactForm.reset();
+    }
+  });
+}
 
- contactForm.addEventListener("submit", (event) => {
-   event.preventDefault();
-   popUp.classList.remove("hidden");
-   popUp.classList.add("flex");
- });
-
- closeButton.addEventListener("click", () => {
-   popUp.classList.add("hidden");
-   popUp.classList.remove("flex");
-   contactForm.reset();
- });
-
-updateUI();
+updateHeaderStyles();
