@@ -83,4 +83,16 @@ router.get("/cart", (req, res) => {
   });
 });
 
+router.post("/remove", (req, res) => {
+  const { productId } = req.body;
+  const cart = req.session.cart || [];
+  req.session.cart = cart.filter((item) => item.productId !== productId);
+  res.json({ success: true });
+});
+
+router.post("/clear", (req, res) => {
+  req.session.cart = [];
+  res.json({ success: true });
+});
+
 module.exports = router;
