@@ -22,10 +22,10 @@
       }
     </style>
   </head>
-  <body>
+  <body class="min-h-screen flex flex-col bg-gray-100">
 <header><%- include('partials/header') %></header>
 
-    <section class="py-10 bg-gray-100 pt-40">
+    <section class="py-10 bg-gray-100 pt-40 flex-grow">
       <div class="container mx-auto px-4">
         <h1 class="text-center text-4xl font-bold mb-8">Meet Our Team</h1>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -55,6 +55,6 @@
       </div>
     </section>
 
-    <footer><%- include('partials/footer') %></footer>
+    <footer class="bg-gray-800 text-white text-center"><%- include('partials/footer') %></footer>
   </body>
 </html>
