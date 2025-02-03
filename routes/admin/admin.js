@@ -5,33 +5,33 @@ const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
 
-// Database connections
+
 const productsDb = new Database('./db/products.db');
 const adminsDb = new Database('./db/admins.db');
 const heroDb = new Database('./db/hero_images.db');
 
 
-// Configure multer for file uploads
+
 const storage = multer.diskStorage({
-  destination: './public/images', // Ensure this directory exists
+  destination: './public/images', 
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Save with unique timestamped filename
+    cb(null, Date.now() + path.extname(file.originalname)); 
   },
 });
 const upload = multer({ storage });
 
-// Admin dashboard route
+
 router.get('/', (req, res, next) => {
   try {
     const products = productsDb.prepare('SELECT * FROM products').all();
     const adminUsers = adminsDb.prepare('SELECT id, username, password FROM admins').all();
-    const heroImages = heroDb.prepare('SELECT * FROM hero_images').all(); // Fetch hero images
+    const heroImages = heroDb.prepare('SELECT * FROM hero_images').all();
 
     res.render('admin/admin', {
       title: 'Administration',
       products,
       adminUsers,
-      heroImages, // Pass hero images to the template
+      heroImages,
     });
   } catch (error) {
     console.error('Error fetching data:', error.message);
@@ -39,7 +39,7 @@ router.get('/', (req, res, next) => {
   }
 });
 
-// Route to delete a product
+
 router.post('/delete/:id', (req, res, next) => {
   const productId = req.params.id;
 
@@ -57,7 +57,7 @@ router.post('/delete/:id', (req, res, next) => {
   }
 });
 
-// Route to update admin details
+
 router.post('/update-admin/:id', async (req, res, next) => {
   const adminId = req.params.id;
   const { username, password } = req.body;
@@ -80,7 +80,7 @@ router.post('/update-admin/:id', async (req, res, next) => {
   }
 });
 
-// Route to update hero images
+
 router.post('/update-hero-images', upload.array('heroImages', 2), (req, res, next) => {
   try {
     const files = req.files;
@@ -89,11 +89,11 @@ router.post('/update-hero-images', upload.array('heroImages', 2), (req, res, nex
       return res.status(400).send('Please upload exactly 2 images.');
     }
 
-    // Update the database with the new image paths
+    
     heroDb.prepare('UPDATE hero_images SET image_path = ? WHERE id = 1').run(`/images/${files[0].filename}`);
     heroDb.prepare('UPDATE hero_images SET image_path = ? WHERE id = 2').run(`/images/${files[1].filename}`);
 
-    res.redirect('/admin'); // Redirect to the admin page
+    res.redirect('/admin');
   } catch (error) {
     console.error('Error updating hero images:', error.message);
     next(error);

@@ -11,17 +11,17 @@
 
   <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
 
-    <!-- Header -->
+    
     <header><%- include('partials/header') %></header>
 
-    <!-- Main Content -->
+    
     <main class="container mx-auto p-6 mt-28 flex-grow">
       <% if (results.length > 0) { %>
         <div class="flex items-center justify-between mb-4">
           <h1 class="text-xl font-semibold">
             Found <%= results.length %> product<%= results.length > 1 ? 's' : '' %>
           </h1>
-          <!-- Dropdown för sortering -->
+          
           <div>
             <label for="sortDropdown" class="text-sm font-medium text-gray-700 mr-2">Sort by:</label>
             <select
@@ -36,23 +36,23 @@
           </div>
         </div>
 
-        <!-- Product Grid -->
+        
         <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           <% results.forEach(product => { %>
 
-            <!-- Product Card -->
+            
             <a 
               href="/products/<%= product.id %>"
               class="block bg-white shadow rounded-lg overflow-hidden transform transition-all duration-300 hover:shadow-lg hover:scale-105">
               <div class="w-full h-48 relative group">
 
-                <!-- Standardbild -->
+                
                 <img
                   src="<%= product.image %>"
                   alt="<%= product.productName %>"
                   class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
                 />
-                <!-- Hoverbild -->
+                
                 <img
                   src="<%= product.secondaryImage1 %>"
                   alt="<%= product.productName %>"
@@ -60,17 +60,17 @@
                 />
               </div>
 
-              <!-- Produktinformation -->
+              
               <div class="p-4 text-center">
-                <!-- Produktnamn -->
+                
                 <h2 class="text-lg font-medium break-words">
                   <%= product.productName %>
                 </h2>
-                <!-- Produktmärke -->
+                
                 <p class="text-sm text-gray-500 break-words">
                   <%= product.brand %>
                 </p>
-                <!-- Produktpris -->
+                
                 <p class="text-sm font-semibold">
                   <%= product.price %> $
                 </p>
@@ -80,14 +80,14 @@
           <% }); %>
         </div>
       <% } else { %>
-        <!-- No Products Message -->
+        
         <p class="text-center text-gray-500 pt-16">
           No products matched your search.
         </p>
       <% } %>
     </main>
 
-    <!-- Footer -->
+    
     <footer><%- include('partials/footer') %></footer>
 
     <script>

@@ -7,11 +7,11 @@ const heroDb = new Database('./db/hero_images.db');
 
 router.get('/', (req, res) => {
   try {
-    // Fetch all products from the database
+    
     const products = db.prepare('SELECT * FROM products').all();
     const heroImages = heroDb.prepare('SELECT image_path FROM hero_images').all();
 
-    // Render the index.ejs page with the fetched products
+    
     res.render('index', {
       title: 'Home',
       products: products,

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       return response.json();
     })
-    // Random 4 produkter visas
+    
     .then((products) => {
       const filteredProducts = products.filter((product) => product.isNew === true);
 
