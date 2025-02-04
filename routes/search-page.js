@@ -22,7 +22,7 @@ router.get("/search", (req, res) => {
     let sql = `
       SELECT id, productName, price, image, secondaryImage1, brand, productDescription, isNew, category
       FROM products
-      WHERE productName LIKE ?
+      WHERE productName LIKE ? OR category LIKE ?
     `;
 
     if (sort === "newest") {
@@ -35,7 +35,7 @@ router.get("/search", (req, res) => {
       sql += " ORDER BY price ASC";
     }
 
-    const results = db.prepare(sql).all(`%${searchQuery}%`);
+    const results = db.prepare(sql).all(`%${searchQuery}%`, `%${searchQuery}%`);
 
     res.render("search-page", {
       title: "Search",
