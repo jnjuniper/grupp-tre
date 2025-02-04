@@ -29,12 +29,12 @@
 
     <main class="container mx-auto px-4 py-10">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
-        <!-- Carousel/Grid Section -->
+        
         <div>
-          <!-- Carousel (Visible on Mobile/Tablet) -->
+          
           <div class="block md:hidden">
             <div id="product-carousel" class="relative w-full" data-carousel="slide">
-              <!-- Carousel wrapper -->
+              
               <div class="relative aspect-square overflow-hidden rounded-lg">
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
                   <img
@@ -65,14 +65,14 @@
                   />
                 </div>
               </div>
-              <!-- Slider indicators -->
+              
               <div class="absolute z-30 flex justify-center w-full bottom-4 space-x-3">
                 <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
                 <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
                 <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
                 <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
               </div>
-              <!-- Slider controls -->
+              
               <button
                 type="button"
                 class="absolute top-1/2 left-2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-black/30 group-hover:bg-black/50 transform -translate-y-1/2"
@@ -110,7 +110,7 @@
             </div>
           </div>
       
-          <!-- Grid (Visible on Desktop) -->
+          
           <div class="hidden md:grid grid-cols-2 gap-4">
             <div>
               <img
@@ -143,7 +143,7 @@
           </div>
         </div>
       
-        <!-- Product Details Section -->
+        
         <div class="bg-white p-6 rounded-lg shadow-md">
           <h1 class="text-3xl font-bold mb-4"><%= product.productName %></h1>
           <div class="flex justify-between items-left mb-6">
@@ -213,13 +213,12 @@
         document.getElementById('add-to-cart').addEventListener('click', async (event) => {
           const button = event.target;
       
-          // Get product details from data attributes
+          
           const productId = button.getAttribute('data-product-id');
           const name = button.getAttribute('data-name');
           const price = button.getAttribute('data-price');
       
           try {
-            // Send a POST request to the backend
             const response = await fetch('/api/cart', {
               method: 'POST',
               headers: {

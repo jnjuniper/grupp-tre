@@ -27,7 +27,7 @@
     <header><%- include('partials/header') %></header>
 
     <main class="max-w-7xl mx-auto p-6 mt-16">
-      <!-- Welcome Section -->
+      
       <section class="mb-12 text-center">
         <h1 class="text-4xl font-bold text-slate-400 mb-4">
           <%= aboutContent.welcome.title %>
@@ -37,7 +37,7 @@
         </p>
       </section>
   
-      <!-- Vision Section -->
+      
       <section class="mb-12">
         <h2 class="text-3xl font-semibold text-slate-400 mb-6">
           <%= aboutContent.vision.title %>
@@ -50,19 +50,19 @@
         </div>
       </section>
   
-<!-- Values Section -->
+
 <section class="mb-12">
   <h2 class="text-3xl font-semibold text-slate-400 mb-6">
     <%= aboutContent.values.title %>
   </h2>
   <div class="flex flex-col md:flex-row items-center gap-6">
-    <!-- Image Section -->
+    
     <img
       src="<%= aboutContent.values.image %>"
       alt="Values Illustration"
       class="w-full md:w-1/2 rounded-lg shadow-md"
     />
-    <!-- Text Content -->
+    
     <ul class="space-y-4 flex-1">
       <% aboutContent.values.list.forEach(value => { %>
         <li>
@@ -79,12 +79,12 @@
 </section>
 
   
-<!-- Goals Section -->
+
 <section class="mb-12">
   <h2 class="text-3xl font-semibold text-slate-400 mb-6">
     <%= aboutContent.goals.title %>
   </h2>
-  <!-- Image Above Text -->
+  
   <img
     src="<%= aboutContent.goals.image %>"
     alt="Goals Illustration"
@@ -97,7 +97,7 @@
   </ul>
 </section>
 
-<!-- Why Choose Us Section -->
+
 <section class="mb-12">
   <h2 class="text-3xl font-semibold text-slate-400 mb-6">
     <%= aboutContent.whyChooseUs.title %>
@@ -107,7 +107,7 @@
       <%= paragraph %>
     </p>
   <% }) %>
-  <!-- Image at the Bottom -->
+  
   <img
     src="<%= aboutContent.whyChooseUs.image %>"
     alt="Why Choose Us Illustration"

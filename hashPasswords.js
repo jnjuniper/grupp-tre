@@ -7,7 +7,7 @@ const users = [
   { username: 'oliver', plainTextPassword: 'oliver' },
   { username: 'jonathan', plainTextPassword: 'jonathan' },
   { username: 'amro', plainTextPassword: 'amro' }
- // Lägg till fler användare här, kör kommando i terminalen "node hashPasswords.js" för att göra lösenorden funkar
+
 ];
 
 users.forEach(user => {
